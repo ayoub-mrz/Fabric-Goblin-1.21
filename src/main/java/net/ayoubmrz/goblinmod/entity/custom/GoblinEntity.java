@@ -124,10 +124,5 @@ public class GoblinEntity extends HostileEntity implements GeoEntity {
         return cache;
     }
 
-    @Override
-    protected void initEquipment(Random random, LocalDifficulty difficulty) {
-        this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.DIAMOND_SWORD));
-    }
-
 
 }
