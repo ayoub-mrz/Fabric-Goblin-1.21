@@ -4,26 +4,25 @@ import net.ayoubmrz.goblinmod.GoblinMod;
 import net.ayoubmrz.goblinmod.entity.custom.GoblinEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
+import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
-public class GoblinRenderer extends MobEntityRenderer<GoblinEntity, GoblinModel<GoblinEntity>> {
 
-    public GoblinRenderer(EntityRendererFactory.Context context) {
-        super(context, new GoblinModel<>(context.getPart(GoblinModel.GOBLIN)), 0.5f);
+public class GoblinRenderer extends GeoEntityRenderer<GoblinEntity> {
+    public GoblinRenderer(EntityRendererFactory.Context renderManager) {
+        super(renderManager, new GoblinModel<>());
     }
 
     @Override
-    public Identifier getTexture(GoblinEntity entity) {
-        return Identifier.of(GoblinMod.MOD_ID, "textures/entity/goblin/goblin.png");
+    public Identifier getTextureLocation(GoblinEntity animatable) {
+        return Identifier.of(GoblinMod.MOD_ID, "textures/entity/goblin.png");
     }
 
     @Override
-    public void render(GoblinEntity livingEntity, float f, float g, MatrixStack matrixStack,
-                       VertexConsumerProvider vertexConsumerProvider, int i) {
-         matrixStack.scale(1f, 1f, 1f);
-        super.render(livingEntity, f, g, matrixStack, vertexConsumerProvider, i);
+    public void render(GoblinEntity entity, float entityYaw, float partialTick, MatrixStack poseStack,
+                       VertexConsumerProvider bufferSource, int packedLight) {
+        super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
     }
 
 }

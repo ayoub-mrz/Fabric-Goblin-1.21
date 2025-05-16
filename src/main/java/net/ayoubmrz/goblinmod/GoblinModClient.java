@@ -11,8 +11,10 @@ public class GoblinModClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
 
-        EntityModelLayerRegistry.registerModelLayer(GoblinModel.GOBLIN, GoblinModel::getTexturedModelData);
+//        EntityModelLayerRegistry.registerModelLayer(GoblinModel.GOBLIN, GoblinModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.GOBLIN, GoblinRenderer::new);
+
+
 
     }
 }

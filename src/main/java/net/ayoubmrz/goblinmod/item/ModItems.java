@@ -11,7 +11,7 @@ import net.minecraft.util.Identifier;
 public class ModItems {
 
     public static final Item GOBLIN_SPAWN_EGG = registerItem("goblin_spawn_egg",
-            new SpawnEggItem(ModEntities.GOBLIN, 0x9dc783, 0xbfaf5f, new Item.Settings()));
+            new SpawnEggItem(ModEntities.GOBLIN, 0x5a925f, 0x412f1f, new Item.Settings()));
 
 
     private static Item registerItem(String name, Item item) {
