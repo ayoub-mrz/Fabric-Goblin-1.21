@@ -39,4 +39,6 @@ public class GoblinModel<T extends GoblinEntity> extends GeoModel<GoblinEntity> 
         }
     }
 
+    
+
 }
