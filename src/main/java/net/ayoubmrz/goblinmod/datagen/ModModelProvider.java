@@ -6,6 +6,7 @@ import net.ayoubmrz.goblinmod.item.ModItems;
 import net.minecraft.data.client.*;
 import net.minecraft.util.Identifier;
 
+import javax.annotation.processing.Generated;
 import java.util.Optional;
 
 public class ModModelProvider extends FabricModelProvider {
@@ -19,6 +20,8 @@ public class ModModelProvider extends FabricModelProvider {
 
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
+
+//        itemModelGenerator.register(ModItems.BONE_ITEM, Models.GENERATED);
 
         itemModelGenerator.register(ModItems.GOBLIN_SPAWN_EGG,
                 new Model(Optional.of(Identifier.of("item/template_spawn_egg")), Optional.empty()));

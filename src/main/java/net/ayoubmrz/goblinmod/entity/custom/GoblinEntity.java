@@ -7,7 +7,6 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.SmallFireballEntity;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.Vec3d;
@@ -45,7 +44,6 @@ public class GoblinEntity extends HostileEntity implements GeoEntity {
     public void startAttackWindup() {
         this.isAttackWindingUp = true;
         this.windupTicks = 10;
-//        this.triggerAnim("attackController", "animation.goblin.attack");
     }
 
     private void performAttack() {
@@ -172,98 +170,6 @@ public class GoblinEntity extends HostileEntity implements GeoEntity {
             return true;
         }
 
-//        public void tick() {
-//            ++this.shootCooldown;
-//            if (this.shootCooldown <= 100) {
-//                LivingEntity livingEntity = this.mob.getTarget();
-//                if (livingEntity != null) {
-//                    this.mob.getLookControl().lookAt(livingEntity, 30.0F, 30.0F);
-//                    this.updateCountdownTicks = Math.max(this.updateCountdownTicks - 1, 0);
-//                    if ((this.pauseWhenMobIdle || this.mob.getVisibilityCache().canSee(livingEntity)) && this.updateCountdownTicks <= 0 && (this.targetX == (double)0.0F && this.targetY == (double)0.0F && this.targetZ == (double)0.0F || livingEntity.squaredDistanceTo(this.targetX, this.targetY, this.targetZ) >= (double)1.0F || this.mob.getRandom().nextFloat() < 0.05F)) {
-//                        this.targetX = livingEntity.getX();
-//                        this.targetY = livingEntity.getY();
-//                        this.targetZ = livingEntity.getZ();
-//                        this.updateCountdownTicks = 4 + this.mob.getRandom().nextInt(7);
-//                        double d = this.mob.squaredDistanceTo(livingEntity);
-//                        if (d > (double)1024.0F) {
-//                            this.updateCountdownTicks += 10;
-//                        } else if (d > (double)256.0F) {
-//                            this.updateCountdownTicks += 5;
-//                        }
-//
-//                        if (!this.mob.getNavigation().startMovingTo(livingEntity, this.speed)) {
-//                            this.updateCountdownTicks += 15;
-//                        }
-//
-//                        this.updateCountdownTicks = this.getTickCount(this.updateCountdownTicks);
-//                    }
-//
-//                    this.cooldown = Math.max(this.cooldown - 1, 0);
-//                    this.attack(livingEntity);
-//                }
-//            } else {
-//
-//                if (this.waitForAnimation == 0) {
-//                    // First tick of ranged attack - trigger animation
-//                    this.mob.isShooting = true;
-//                    this.mob.triggerAnim("shootController", "animation.goblin.attack");
-//                    this.waitForAnimation++;
-//                }
-//                else if (this.waitForAnimation < 20) {
-//                    // Waiting for animation to reach the attack point
-//                    this.waitForAnimation++;
-//                } else if (this.waitForAnimation >= 40) {
-//                    this.shootCooldown = 0;
-//                    this.waitForAnimation = 0;
-//                    this.shootCount = 0;
-//                    LivingEntity livingEntity = this.mob.getTarget();
-//                    if (livingEntity != null) {
-//                        boolean bl = this.mob.getVisibilityCache().canSee(livingEntity);
-//                        if (bl) {
-//                            this.targetNotVisibleTicks = 0;
-//                        } else {
-//                            ++this.targetNotVisibleTicks;
-//                        }
-//
-//                        double d = this.mob.squaredDistanceTo(livingEntity);
-//                        if (d < (double)4.0F) {
-//                            if (!bl) {
-//                                return;
-//                            }
-//
-//                            this.mob.getMoveControl().moveTo(livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), (double)1.0F);
-//                        } else if (d < this.getFollowRange() * this.getFollowRange() && bl) {
-//                            double e = livingEntity.getX() - this.mob.getX();
-//                            double f = livingEntity.getBodyY((double)0.5F) - this.mob.getBodyY((double)0.5F);
-//                            double g = livingEntity.getZ() - this.mob.getZ();
-//
-//                            if (this.shootCount < 1) {
-//                                ++this.shootCount;
-//                                this.animeCount = 0;
-//                                double h = Math.sqrt(Math.sqrt(d)) * (double)0.5F;
-//                                if (!this.mob.isSilent()) {
-//                                    this.mob.getWorld().syncWorldEvent((PlayerEntity)null, 1018, this.mob.getBlockPos(), 0);
-//                                }
-//
-//                                for(int i = 0; i < 1; ++i) {
-//                                    Vec3d vec3d = new Vec3d(this.mob.getRandom().nextTriangular(e, 2.297 * h), f, this.mob.getRandom().nextTriangular(g, 2.297 * h));
-//                                    SmallFireballEntity smallFireballEntity = new SmallFireballEntity(this.mob.getWorld(), this.mob, vec3d.normalize());
-//                                    smallFireballEntity.setPosition(smallFireballEntity.getX(), this.mob.getBodyY((double)0.5F) + (double)0.5F, smallFireballEntity.getZ());
-//                                    this.mob.getWorld().spawnEntity(smallFireballEntity);
-//                                }
-//
-//                            }
-//
-//                        }
-//
-//                        this.mob.getLookControl().lookAt(livingEntity, 10.0F, 10.0F);
-//                    }
-//
-//                    super.tick();
-//                }
-//            }
-//        }
-
         public void tick() {
             ++this.shootCooldown;
             if (this.shootCooldown <= 100) {
@@ -298,28 +204,20 @@ public class GoblinEntity extends HostileEntity implements GeoEntity {
 
                 // trigger animation
                 if (!animationTriggered) {
-                    System.out.println("making it true");
                     isShooting = true;
                     this.waitForAnimation = 0;
                     this.animationTriggered = true;
                 }
 
-                    while(waitForAnimation < 20){
-                        this.waitForAnimation++;
-                    }
+                this.waitForAnimation++;
 
-                    System.out.println(waitForAnimation);
-
-                if (this.waitForAnimation == 20) {
-
-                    System.out.println(waitForAnimation);
-                    System.out.println("time for fireball");
-                    this.shootFireBall();
-
-                }
+                if (this.waitForAnimation == 25) {
+                    this.shootBone();
                     this.shootCooldown = 0;
                     this.waitForAnimation = 0;
                     this.animationTriggered = false;
+                }
+
             }
         }
 
@@ -327,7 +225,7 @@ public class GoblinEntity extends HostileEntity implements GeoEntity {
             return this.mob.getAttributeValue(EntityAttributes.GENERIC_FOLLOW_RANGE);
         }
 
-        protected void shootFireBall() {
+        protected void shootBone() {
             LivingEntity target = this.mob.getTarget();
             if (target != null) {
                 Vec3d vec3d = new Vec3d(
@@ -336,15 +234,15 @@ public class GoblinEntity extends HostileEntity implements GeoEntity {
                         target.getZ() - this.mob.getZ()
                 ).normalize();
 
-                SmallFireballEntity fireball = new SmallFireballEntity(
+                BoneProjectileEntity Bone = new BoneProjectileEntity(
                         this.mob.getWorld(), this.mob, vec3d
                 );
-                fireball.setPosition(
-                        fireball.getX(),
+                Bone.setPosition(
+                        Bone.getX(),
                         this.mob.getBodyY(0.5) + 0.5,
-                        fireball.getZ()
+                        Bone.getZ()
                 );
-                this.mob.getWorld().spawnEntity(fireball);
+                this.mob.getWorld().spawnEntity(Bone);
             }
         }
 
@@ -389,10 +287,9 @@ public class GoblinEntity extends HostileEntity implements GeoEntity {
     private PlayState shootPredicate(AnimationState<GoblinEntity> event) {
 
         if (isShooting) {
-            System.out.println("shooting worked");
             event.getController().forceAnimationReset();
             event.getController().setAnimation(
-                    RawAnimation.begin().then("animation.goblin.attack", Animation.LoopType.PLAY_ONCE)
+                    RawAnimation.begin().then("animation.goblin.shoot", Animation.LoopType.PLAY_ONCE)
             );
             this.isShooting = false;
             return PlayState.CONTINUE;
@@ -404,7 +301,6 @@ public class GoblinEntity extends HostileEntity implements GeoEntity {
     private PlayState attackPredicate(AnimationState<GoblinEntity> event) {
 
         if (this.handSwinging) {
-            System.out.println("attacking worked");
             event.getController().forceAnimationReset();
             event.getController().setAnimation(
                     RawAnimation.begin().then("animation.goblin.attack", Animation.LoopType.PLAY_ONCE)
