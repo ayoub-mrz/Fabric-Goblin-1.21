@@ -4,9 +4,6 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.data.DataTracker;
-import net.minecraft.entity.data.TrackedData;
-import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
@@ -16,17 +13,18 @@ import software.bernie.geckolib.animatable.instance.SingletonAnimatableInstanceC
 import software.bernie.geckolib.animation.*;
 import software.bernie.geckolib.animation.AnimationState;
 
+import static net.minecraft.entity.attribute.EntityAttributes.GENERIC_MOVEMENT_SPEED;
 
-public class GoblinEntity extends HostileEntity implements GeoEntity {
+public class LilDaveEntity extends HostileEntity implements GeoEntity {
 
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
-    private static final TrackedData<Boolean> IS_SHOOTING = DataTracker.registerData(GoblinEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
-
     private boolean isAttackWindingUp = false;
     private int windupTicks = 0;
-    private int shootingTicks = 0;
 
+    public LilDaveEntity(EntityType<? extends HostileEntity> entityType, World world) {
+        super(entityType, world);
+    }
 
     @Override
     public void tick() {
@@ -41,13 +39,6 @@ public class GoblinEntity extends HostileEntity implements GeoEntity {
             }
         }
 
-        if (isShooting()) {
-            shootingTicks++;
-            if (shootingTicks > 5) {
-                setShooting(false);
-                shootingTicks = 0;
-            }
-        }
     }
 
     public void startAttackWindup() {
@@ -71,23 +62,6 @@ public class GoblinEntity extends HostileEntity implements GeoEntity {
         return super.tryAttack(target);
     }
 
-    public GoblinEntity(EntityType<? extends HostileEntity> entityType, World world) {
-        super(entityType, world);
-    }
-
-    @Override
-    protected void initDataTracker(DataTracker.Builder builder) {
-        super.initDataTracker(builder);
-        builder.add(IS_SHOOTING, false);
-    }
-
-    public boolean isShooting() {
-        return this.dataTracker.get(IS_SHOOTING);
-    }
-
-    public void setShooting(boolean shooting) {
-        this.dataTracker.set(IS_SHOOTING, shooting);
-    }
 
     public static DefaultAttributeContainer.Builder setAttributes() {
         return HostileEntity.createMobAttributes()
@@ -101,41 +75,26 @@ public class GoblinEntity extends HostileEntity implements GeoEntity {
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
 
-        this.goalSelector.add(1, new GoblinMeleeAttackGoal(this, 0.4D, true));
+        this.goalSelector.add(1, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
 
-        this.goalSelector.add(3, new WanderAroundFarGoal(this, 0.4f, 1));
+        this.goalSelector.add(2, new MeleeAttackGoal(this, 0.6D, true));
+
+        this.goalSelector.add(3, new WanderAroundFarGoal(this, 0.4D, 1));
 
         this.goalSelector.add(4, new LookAroundGoal(this));
-
-        this.goalSelector.add(1, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
     }
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 0, this::predicate));
         controllers.add(new AnimationController<>(this, "attackController", 0, this::attackPredicate));
-        controllers.add(new AnimationController<>(this, "shootController", 0, this::shootPredicate));
     }
 
-    private PlayState shootPredicate(AnimationState<GoblinEntity> event) {
-
-        if (this.isShooting()) {
-            event.getController().forceAnimationReset();
-            event.getController().setAnimation(
-                    RawAnimation.begin().then("animation.goblin.shoot", Animation.LoopType.PLAY_ONCE)
-            );
-            setShooting(false);
-            return PlayState.CONTINUE;
-        }
-
-        return PlayState.CONTINUE;
-    }
-
-    private PlayState attackPredicate(AnimationState<GoblinEntity> event) {
+    private PlayState attackPredicate(AnimationState<LilDaveEntity> event) {
         if (this.handSwinging) {
             event.getController().forceAnimationReset();
             event.getController().setAnimation(
-                    RawAnimation.begin().then("animation.goblin.attack", Animation.LoopType.PLAY_ONCE)
+                    RawAnimation.begin().then("animation.lil_dave.attack", Animation.LoopType.PLAY_ONCE)
             );
             this.handSwinging = false;
             return PlayState.CONTINUE;
@@ -144,15 +103,15 @@ public class GoblinEntity extends HostileEntity implements GeoEntity {
         return PlayState.CONTINUE;
     }
 
-    private PlayState predicate(AnimationState<GoblinEntity> animationState) {
+    private PlayState predicate(AnimationState<LilDaveEntity> animationState) {
         var controller = animationState.getController();
 
-        if (animationState.isMoving() && !this.isShooting()) {
-            controller.setAnimation(RawAnimation.begin().then("animation.goblin.walk", Animation.LoopType.LOOP));
+        if (animationState.isMoving()) {
+            controller.setAnimation(RawAnimation.begin().then("animation.lil_dave.walk", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }
 
-        controller.setAnimation(RawAnimation.begin().then("animation.goblin.idle", Animation.LoopType.LOOP));
+        controller.setAnimation(RawAnimation.begin().then("animation.lil_dave.idle", Animation.LoopType.LOOP));
         return PlayState.CONTINUE;
     }
 

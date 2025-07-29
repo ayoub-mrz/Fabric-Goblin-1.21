@@ -1,8 +1,7 @@
 package net.ayoubmrz.goblinmod;
 
 import net.ayoubmrz.goblinmod.entity.ModEntities;
-import net.ayoubmrz.goblinmod.entity.client.GoblinModel;
-import net.ayoubmrz.goblinmod.entity.client.GoblinRenderer;
+import net.ayoubmrz.goblinmod.entity.client.*;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
@@ -11,9 +10,17 @@ public class GoblinModClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
 
-//        EntityModelLayerRegistry.registerModelLayer(GoblinModel.GOBLIN, GoblinModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.GOBLIN, GoblinRenderer::new);
+        EntityRendererRegistry.register(ModEntities.LILDAVE, LilDaveRenderer::new);
+        EntityRendererRegistry.register(ModEntities.FIREDAVE, FireDaveRenderer::new);
+        EntityRendererRegistry.register(ModEntities.WATERDAVE, WaterDaveRenderer::new);
+        EntityRendererRegistry.register(ModEntities.LIGHTNINGDAVE, LightningDaveRenderer::new);
 
+        EntityModelLayerRegistry.registerModelLayer(BoneProjectileModel.ANCIENTBONE, BoneProjectileModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.ANCIENTBONE, BoneProjectileRenderer::new);
+
+//        EntityModelLayerRegistry.registerModelLayer(BoneProjectileModel.ANCIENTBONE, RedBallProjectileModel::getTexturedModelData);
+//        EntityRendererRegistry.register(ModEntities.REDBALL, RedBallProjectileRenderer::new);
 
 
     }

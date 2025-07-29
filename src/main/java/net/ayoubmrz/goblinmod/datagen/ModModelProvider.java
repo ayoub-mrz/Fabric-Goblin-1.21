@@ -21,9 +21,21 @@ public class ModModelProvider extends FabricModelProvider {
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
 
-//        itemModelGenerator.register(ModItems.BONE_ITEM, Models.GENERATED);
-
         itemModelGenerator.register(ModItems.GOBLIN_SPAWN_EGG,
                 new Model(Optional.of(Identifier.of("item/template_spawn_egg")), Optional.empty()));
+
+        itemModelGenerator.register(ModItems.LIL_DAVE_SPAWN_EGG,
+                new Model(Optional.of(Identifier.of("item/template_spawn_egg")), Optional.empty()));
+        itemModelGenerator.register(ModItems.FIRE_DAVE_SPAWN_EGG,
+                new Model(Optional.of(Identifier.of("item/template_spawn_egg")), Optional.empty()));
+        itemModelGenerator.register(ModItems.WATER_DAVE_SPAWN_EGG,
+                new Model(Optional.of(Identifier.of("item/template_spawn_egg")), Optional.empty()));
+        itemModelGenerator.register(ModItems.LIGHTNING_DAVE_SPAWN_EGG,
+                new Model(Optional.of(Identifier.of("item/template_spawn_egg")), Optional.empty()));
+
+        itemModelGenerator.register(ModItems.RED_BALL, Models.GENERATED);
+        itemModelGenerator.register(ModItems.BLUE_BALL, Models.GENERATED);
+        itemModelGenerator.register(ModItems.YELLOW_BALL, Models.GENERATED);
+
     }
 }

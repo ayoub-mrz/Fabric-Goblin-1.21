@@ -1,6 +1,7 @@
 package net.ayoubmrz.goblinmod;
 
 import net.ayoubmrz.goblinmod.entity.ModEntities;
+import net.ayoubmrz.goblinmod.entity.custom.LilDaveEntity;
 import net.ayoubmrz.goblinmod.entity.custom.GoblinEntity;
 import net.ayoubmrz.goblinmod.item.ModItems;
 import net.fabricmc.api.ModInitializer;
@@ -19,6 +20,14 @@ public class GoblinMod implements ModInitializer {
 		ModEntities.registerModEntities();
 
 		FabricDefaultAttributeRegistry.register(ModEntities.GOBLIN, GoblinEntity.setAttributes());
+
+		FabricDefaultAttributeRegistry.register(ModEntities.LILDAVE, LilDaveEntity.setAttributes());
+
+		FabricDefaultAttributeRegistry.register(ModEntities.FIREDAVE, LilDaveEntity.setAttributes());
+
+		FabricDefaultAttributeRegistry.register(ModEntities.WATERDAVE, LilDaveEntity.setAttributes());
+
+		FabricDefaultAttributeRegistry.register(ModEntities.LIGHTNINGDAVE, LilDaveEntity.setAttributes());
 
 		ModItems.registerModItems();
 

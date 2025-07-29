@@ -1,4 +1,20 @@
 {
   "item.goblinmod.goblin_spawn_egg": "Goblin Spawn Egg",
-  "entity.goblinmod.goblin": "Goblin"
+  "item.goblinmod.lil_dave_spawn_egg": "Lil Dave Spawn Egg",
+  "item.goblinmod.fire_dave_spawn_egg": "Fire Dave Spawn Egg",
+  "item.goblinmod.water_dave_spawn_egg": "Water Dave Spawn Egg",
+  "item.goblinmod.lightning_dave_spawn_egg": "Lightning Dave Spawn Egg",
+  "item.goblinmod.red_ball": "Red Ball",
+  "item.goblinmod.blue_ball": "Blue Ball",
+  "item.goblinmod.yellow_ball": "Yellow Ball",
+  "item.goblinmod.ancient_bone": "Ancient Bone",
+  "item.goblinmod.coin": "Coin",
+
+
+  "entity.goblinmod.ancient_bone": "Ancient Bone",
+  "entity.goblinmod.goblin": "Goblin",
+  "entity.goblinmod.lil_dave": "Lil Dave",
+  "entity.goblinmod.fire_dave": "Fire Dave",
+  "entity.goblinmod.water_dave": "Water Dave",
+  "entity.goblinmod.lightning_dave": "Lightning Dave"
 }

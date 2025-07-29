@@ -13,7 +13,21 @@ public class ModItems {
     public static final Item GOBLIN_SPAWN_EGG = registerItem("goblin_spawn_egg",
             new SpawnEggItem(ModEntities.GOBLIN, 0x5a925f, 0x412f1f, new Item.Settings()));
 
-    public static final Item BONE_ITEM = registerItem("bone_item", new Item( new Item.Settings()));
+    public static final Item LIL_DAVE_SPAWN_EGG = registerItem("lil_dave_spawn_egg",
+            new SpawnEggItem(ModEntities.LILDAVE, 0x9dc783, 0xbfaf5f, new Item.Settings()));
+    public static final Item FIRE_DAVE_SPAWN_EGG = registerItem("fire_dave_spawn_egg",
+            new SpawnEggItem(ModEntities.FIREDAVE, 0x9a474a, 0xc88e5c, new Item.Settings()));
+    public static final Item WATER_DAVE_SPAWN_EGG = registerItem("water_dave_spawn_egg",
+            new SpawnEggItem(ModEntities.WATERDAVE, 0x378ad1, 0x42c0bf, new Item.Settings()));
+    public static final Item LIGHTNING_DAVE_SPAWN_EGG = registerItem("lightning_dave_spawn_egg",
+            new SpawnEggItem(ModEntities.LIGHTNINGDAVE, 0xb0a14c, 0xd3bf55, new Item.Settings()));
+
+    public static final Item ANCIENT_BONE = registerItem("ancient_bone", new Item( new Item.Settings()));
+    public static final Item COIN = registerItem("coin", new Item( new Item.Settings()));
+
+    public static final Item RED_BALL = registerItem("red_ball", new Item( new Item.Settings()));
+    public static final Item BLUE_BALL = registerItem("blue_ball", new Item( new Item.Settings()));
+    public static final Item YELLOW_BALL = registerItem("yellow_ball", new Item( new Item.Settings()));
 
 
     private static Item registerItem(String name, Item item) {
@@ -25,7 +39,14 @@ public class ModItems {
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {
             entries.add(GOBLIN_SPAWN_EGG);
-            entries.add(BONE_ITEM);
+            entries.add(LIL_DAVE_SPAWN_EGG);
+            entries.add(FIRE_DAVE_SPAWN_EGG);
+            entries.add(WATER_DAVE_SPAWN_EGG);
+            entries.add(LIGHTNING_DAVE_SPAWN_EGG);
+            entries.add(ANCIENT_BONE);
+            entries.add(RED_BALL);
+            entries.add(BLUE_BALL);
+            entries.add(YELLOW_BALL);
         });
     }
 }
