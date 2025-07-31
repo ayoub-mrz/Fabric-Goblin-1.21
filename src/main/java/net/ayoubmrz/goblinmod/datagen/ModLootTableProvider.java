@@ -71,5 +71,84 @@ public class ModLootTableProvider extends SimpleFabricLootTableProvider {
                         )
         );
 
+        RegistryKey<LootTable> FireDaveLootTableKey = RegistryKey.of(RegistryKeys.LOOT_TABLE,
+                Identifier.of("goblinmod", "entities/fire_dave"));
+
+        consumer.accept(
+                FireDaveLootTableKey,
+                LootTable.builder()
+                        .pool(LootPool.builder()
+                                .rolls(ConstantLootNumberProvider.create(1))
+                                .conditionally(RandomChanceLootCondition.builder(0.2f))
+                                .with(ItemEntry.builder(ModItems.RED_BALL)
+                                        .apply(SetCountLootFunction.builder(
+                                                UniformLootNumberProvider.create(4.0f, 8.0f)
+                                        ))
+                                )
+                        )
+                        .pool(LootPool.builder()
+                                .rolls(ConstantLootNumberProvider.create(1))
+                                .conditionally(RandomChanceLootCondition.builder(1f))
+                                .with(ItemEntry.builder(ModItems.COIN)
+                                        .apply(SetCountLootFunction.builder(
+                                                UniformLootNumberProvider.create(10.0f, 20.0f)
+                                        ))
+                                )
+                        )
+        );
+
+        RegistryKey<LootTable> WaterDaveLootTableKey = RegistryKey.of(RegistryKeys.LOOT_TABLE,
+                Identifier.of("goblinmod", "entities/water_dave"));
+
+        consumer.accept(
+                WaterDaveLootTableKey,
+                LootTable.builder()
+                        .pool(LootPool.builder()
+                                .rolls(ConstantLootNumberProvider.create(1))
+                                .conditionally(RandomChanceLootCondition.builder(0.2f))
+                                .with(ItemEntry.builder(ModItems.BLUE_BALL)
+                                        .apply(SetCountLootFunction.builder(
+                                                UniformLootNumberProvider.create(4.0f, 8.0f)
+                                        ))
+                                )
+                        )
+                        .pool(LootPool.builder()
+                                .rolls(ConstantLootNumberProvider.create(1))
+                                .conditionally(RandomChanceLootCondition.builder(1f))
+                                .with(ItemEntry.builder(ModItems.COIN)
+                                        .apply(SetCountLootFunction.builder(
+                                                UniformLootNumberProvider.create(10.0f, 20.0f)
+                                        ))
+                                )
+                        )
+        );
+
+        RegistryKey<LootTable> LightningDaveLootTableKey = RegistryKey.of(RegistryKeys.LOOT_TABLE,
+                Identifier.of("goblinmod", "entities/lightning_dave"));
+
+        consumer.accept(
+                LightningDaveLootTableKey,
+                LootTable.builder()
+                        .pool(LootPool.builder()
+                                .rolls(ConstantLootNumberProvider.create(1))
+                                .conditionally(RandomChanceLootCondition.builder(0.2f))
+                                .with(ItemEntry.builder(ModItems.YELLOW_BALL)
+                                        .apply(SetCountLootFunction.builder(
+                                                UniformLootNumberProvider.create(4.0f, 8.0f)
+                                        ))
+                                )
+                        )
+                        .pool(LootPool.builder()
+                                .rolls(ConstantLootNumberProvider.create(1))
+                                .conditionally(RandomChanceLootCondition.builder(1f))
+                                .with(ItemEntry.builder(ModItems.COIN)
+                                        .apply(SetCountLootFunction.builder(
+                                                UniformLootNumberProvider.create(10.0f, 20.0f)
+                                        ))
+                                )
+                        )
+        );
+
     }
+
 }

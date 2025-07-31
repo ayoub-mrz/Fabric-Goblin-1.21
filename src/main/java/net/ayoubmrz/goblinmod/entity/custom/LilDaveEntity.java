@@ -13,8 +13,6 @@ import software.bernie.geckolib.animatable.instance.SingletonAnimatableInstanceC
 import software.bernie.geckolib.animation.*;
 import software.bernie.geckolib.animation.AnimationState;
 
-import static net.minecraft.entity.attribute.EntityAttributes.GENERIC_MOVEMENT_SPEED;
-
 public class LilDaveEntity extends HostileEntity implements GeoEntity {
 
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);

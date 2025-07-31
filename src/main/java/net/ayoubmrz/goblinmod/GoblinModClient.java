@@ -19,8 +19,8 @@ public class GoblinModClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(BoneProjectileModel.ANCIENTBONE, BoneProjectileModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.ANCIENTBONE, BoneProjectileRenderer::new);
 
-//        EntityModelLayerRegistry.registerModelLayer(BoneProjectileModel.ANCIENTBONE, RedBallProjectileModel::getTexturedModelData);
-//        EntityRendererRegistry.register(ModEntities.REDBALL, RedBallProjectileRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(BallProjectileModel.BALL, BallProjectileModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.BALL, BallProjectileRenderer::new);
 
 
     }

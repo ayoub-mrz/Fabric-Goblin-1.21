@@ -1,6 +1,8 @@
 package net.ayoubmrz.goblinmod.entity.custom;
 
-import net.minecraft.entity.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -14,23 +16,18 @@ import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animatable.instance.SingletonAnimatableInstanceCache;
 import software.bernie.geckolib.animation.*;
-import software.bernie.geckolib.animation.AnimationState;
 
 
-public class LightningDaveEntity extends HostileEntity implements GeoEntity, IShootable {
+public class TestEntity extends HostileEntity implements GeoEntity {
 
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
-    private static final TrackedData<Boolean> IS_SHOOTING = DataTracker.registerData(LightningDaveEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+    private static final TrackedData<Boolean> IS_SHOOTING = DataTracker.registerData(TestEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 
     private boolean isAttackWindingUp = false;
     private int windupTicks = 0;
     private int shootingTicks = 0;
-    private final String TEXTUREPATH = "textures/entity/yellow_ball.png";
 
-    public LightningDaveEntity(EntityType<? extends HostileEntity> entityType, World world) {
-        super(entityType, world);
-    }
 
     @Override
     public void tick() {
@@ -75,6 +72,10 @@ public class LightningDaveEntity extends HostileEntity implements GeoEntity, ISh
         return super.tryAttack(target);
     }
 
+    public TestEntity(EntityType<? extends HostileEntity> entityType, World world) {
+        super(entityType, world);
+    }
+
     @Override
     protected void initDataTracker(DataTracker.Builder builder) {
         super.initDataTracker(builder);
@@ -84,8 +85,6 @@ public class LightningDaveEntity extends HostileEntity implements GeoEntity, ISh
     public boolean isShooting() {
         return this.dataTracker.get(IS_SHOOTING);
     }
-
-    public String getTexturePath() {return TEXTUREPATH;}
 
     public void setShooting(boolean shooting) {
         this.dataTracker.set(IS_SHOOTING, shooting);
@@ -103,7 +102,7 @@ public class LightningDaveEntity extends HostileEntity implements GeoEntity, ISh
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
 
-        this.goalSelector.add(1, new DaveMeleeAttackGoal(this, 0.4D, true));
+        this.goalSelector.add(1, new MeleeAttackGoal(this, 0.4D, true));
 
         this.goalSelector.add(3, new WanderAroundFarGoal(this, 0.4f, 1));
 
@@ -115,15 +114,16 @@ public class LightningDaveEntity extends HostileEntity implements GeoEntity, ISh
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 0, this::predicate));
+        controllers.add(new AnimationController<>(this, "attackController", 0, this::attackPredicate));
         controllers.add(new AnimationController<>(this, "shootController", 0, this::shootPredicate));
     }
 
-    private PlayState shootPredicate(AnimationState<LightningDaveEntity> event) {
+    private PlayState shootPredicate(AnimationState<TestEntity> event) {
 
         if (this.isShooting()) {
             event.getController().forceAnimationReset();
             event.getController().setAnimation(
-                    RawAnimation.begin().then("animation.lil_dave.attack", Animation.LoopType.PLAY_ONCE)
+                    RawAnimation.begin().then("animation.goblin.shoot", Animation.LoopType.PLAY_ONCE)
             );
             setShooting(false);
             return PlayState.CONTINUE;
@@ -132,15 +132,28 @@ public class LightningDaveEntity extends HostileEntity implements GeoEntity, ISh
         return PlayState.CONTINUE;
     }
 
-    private PlayState predicate(AnimationState<LightningDaveEntity> animationState) {
-        var controller = animationState.getController();
-
-        if (animationState.isMoving() && !this.isShooting()) {
-            controller.setAnimation(RawAnimation.begin().then("animation.lil_dave.walk", Animation.LoopType.LOOP));
+    private PlayState attackPredicate(AnimationState<TestEntity> event) {
+        if (this.handSwinging) {
+            event.getController().forceAnimationReset();
+            event.getController().setAnimation(
+                    RawAnimation.begin().then("animation.goblin.attack", Animation.LoopType.PLAY_ONCE)
+            );
+            this.handSwinging = false;
             return PlayState.CONTINUE;
         }
 
-        controller.setAnimation(RawAnimation.begin().then("animation.lil_dave.idle", Animation.LoopType.LOOP));
+        return PlayState.CONTINUE;
+    }
+
+    private PlayState predicate(AnimationState<TestEntity> animationState) {
+        var controller = animationState.getController();
+
+        if (animationState.isMoving() && !this.isShooting()) {
+            controller.setAnimation(RawAnimation.begin().then("animation.goblin.walk", Animation.LoopType.LOOP));
+            return PlayState.CONTINUE;
+        }
+
+        controller.setAnimation(RawAnimation.begin().then("animation.goblin.idle", Animation.LoopType.LOOP));
         return PlayState.CONTINUE;
     }
 

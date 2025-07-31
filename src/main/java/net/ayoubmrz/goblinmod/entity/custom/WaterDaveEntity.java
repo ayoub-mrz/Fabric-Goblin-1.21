@@ -4,6 +4,9 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
@@ -13,12 +16,17 @@ import software.bernie.geckolib.animatable.instance.SingletonAnimatableInstanceC
 import software.bernie.geckolib.animation.*;
 import software.bernie.geckolib.animation.AnimationState;
 
-public class WaterDaveEntity extends HostileEntity implements GeoEntity {
+
+public class WaterDaveEntity extends HostileEntity implements GeoEntity, IShootable {
 
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
+    private static final TrackedData<Boolean> IS_SHOOTING = DataTracker.registerData(WaterDaveEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+
     private boolean isAttackWindingUp = false;
     private int windupTicks = 0;
+    private int shootingTicks = 0;
+    private final String TEXTUREPATH = "textures/entity/blue_ball.png";
 
     public WaterDaveEntity(EntityType<? extends HostileEntity> entityType, World world) {
         super(entityType, world);
@@ -37,6 +45,13 @@ public class WaterDaveEntity extends HostileEntity implements GeoEntity {
             }
         }
 
+        if (isShooting()) {
+            shootingTicks++;
+            if (shootingTicks > 5) {
+                setShooting(false);
+                shootingTicks = 0;
+            }
+        }
     }
 
     public void startAttackWindup() {
@@ -60,6 +75,21 @@ public class WaterDaveEntity extends HostileEntity implements GeoEntity {
         return super.tryAttack(target);
     }
 
+    @Override
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(IS_SHOOTING, false);
+    }
+
+    public boolean isShooting() {
+        return this.dataTracker.get(IS_SHOOTING);
+    }
+
+    public void setShooting(boolean shooting) {
+        this.dataTracker.set(IS_SHOOTING, shooting);
+    }
+
+    public String getTexturePath() {return TEXTUREPATH;}
 
     public static DefaultAttributeContainer.Builder setAttributes() {
         return HostileEntity.createMobAttributes()
@@ -73,28 +103,29 @@ public class WaterDaveEntity extends HostileEntity implements GeoEntity {
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
 
-        this.goalSelector.add(1, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
+        this.goalSelector.add(1, new DaveMeleeAttackGoal(this, 0.4D, true));
 
-        this.goalSelector.add(2, new MeleeAttackGoal(this, 0.6D, true));
-
-        this.goalSelector.add(3, new WanderAroundFarGoal(this, 0.4D, 1));
+        this.goalSelector.add(3, new WanderAroundFarGoal(this, 0.4f, 1));
 
         this.goalSelector.add(4, new LookAroundGoal(this));
+
+        this.goalSelector.add(1, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
     }
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 0, this::predicate));
-        controllers.add(new AnimationController<>(this, "attackController", 0, this::attackPredicate));
+        controllers.add(new AnimationController<>(this, "shootController", 0, this::shootPredicate));
     }
 
-    private PlayState attackPredicate(AnimationState<WaterDaveEntity> event) {
-        if (this.handSwinging) {
+    private PlayState shootPredicate(AnimationState<WaterDaveEntity> event) {
+
+        if (this.isShooting()) {
             event.getController().forceAnimationReset();
             event.getController().setAnimation(
                     RawAnimation.begin().then("animation.lil_dave.attack", Animation.LoopType.PLAY_ONCE)
             );
-            this.handSwinging = false;
+            setShooting(false);
             return PlayState.CONTINUE;
         }
 
@@ -104,7 +135,7 @@ public class WaterDaveEntity extends HostileEntity implements GeoEntity {
     private PlayState predicate(AnimationState<WaterDaveEntity> animationState) {
         var controller = animationState.getController();
 
-        if (animationState.isMoving()) {
+        if (animationState.isMoving() && !this.isShooting()) {
             controller.setAnimation(RawAnimation.begin().then("animation.lil_dave.walk", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }
