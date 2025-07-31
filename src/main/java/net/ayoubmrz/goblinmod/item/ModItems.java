@@ -22,6 +22,9 @@ public class ModItems {
     public static final Item LIGHTNING_DAVE_SPAWN_EGG = registerItem("lightning_dave_spawn_egg",
             new SpawnEggItem(ModEntities.LIGHTNINGDAVE, 0xb0a14c, 0xd3bf55, new Item.Settings()));
 
+    public static final Item BIG_WOLF_SPAWN_EGG = registerItem("big_wolf_spawn_egg",
+            new SpawnEggItem(ModEntities.BIGWOLF, 0xf2f2f2, 0xc7c7c7, new Item.Settings()));
+
     public static final Item ANCIENT_BONE = registerItem("ancient_bone", new Item( new Item.Settings()));
     public static final Item COIN = registerItem("coin", new Item( new Item.Settings()));
 
@@ -43,6 +46,7 @@ public class ModItems {
             entries.add(FIRE_DAVE_SPAWN_EGG);
             entries.add(WATER_DAVE_SPAWN_EGG);
             entries.add(LIGHTNING_DAVE_SPAWN_EGG);
+            entries.add(BIG_WOLF_SPAWN_EGG);
             entries.add(ANCIENT_BONE);
             entries.add(RED_BALL);
             entries.add(BLUE_BALL);

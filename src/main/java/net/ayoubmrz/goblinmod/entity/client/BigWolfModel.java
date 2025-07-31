@@ -1,7 +1,7 @@
 package net.ayoubmrz.goblinmod.entity.client;
 
 import net.ayoubmrz.goblinmod.GoblinMod;
-import net.ayoubmrz.goblinmod.entity.custom.GoblinEntity;
+import net.ayoubmrz.goblinmod.entity.custom.BigWolfEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import software.bernie.geckolib.animation.AnimationState;
@@ -10,26 +10,26 @@ import software.bernie.geckolib.constant.DataTickets;
 import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.model.data.EntityModelData;
 
-public class TestModel<T extends GoblinEntity> extends GeoModel<GoblinEntity> {
+public class BigWolfModel<T extends BigWolfEntity> extends GeoModel<BigWolfEntity> {
 
 
     @Override
-    public Identifier getModelResource(GoblinEntity goblinEntity) {
-        return Identifier.of(GoblinMod.MOD_ID, "geo/goblin.geo.json");
+    public Identifier getModelResource(BigWolfEntity goblinEntity) {
+        return Identifier.of(GoblinMod.MOD_ID, "geo/big_wolf.geo.json");
     }
 
     @Override
-    public Identifier getTextureResource(GoblinEntity goblinEntity) {
-        return Identifier.of(GoblinMod.MOD_ID, "textures/entity/goblin.png");
+    public Identifier getTextureResource(BigWolfEntity goblinEntity) {
+        return Identifier.of(GoblinMod.MOD_ID, "textures/entity/big_wolf.png");
     }
 
     @Override
-    public Identifier getAnimationResource(GoblinEntity goblinEntity) {
-        return Identifier.of(GoblinMod.MOD_ID, "animations/goblin.animation.json");
+    public Identifier getAnimationResource(BigWolfEntity goblinEntity) {
+        return Identifier.of(GoblinMod.MOD_ID, "animations/big_wolf.animation.json");
     }
 
     @Override
-    public void setCustomAnimations(GoblinEntity animatable, long instanceId, AnimationState<GoblinEntity> animationState) {
+    public void setCustomAnimations(BigWolfEntity animatable, long instanceId, AnimationState<BigWolfEntity> animationState) {
         GeoBone head = getAnimationProcessor().getBone("head");
 
         if (head != null) {

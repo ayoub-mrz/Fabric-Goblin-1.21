@@ -29,6 +29,8 @@ public class GoblinMod implements ModInitializer {
 
 		FabricDefaultAttributeRegistry.register(ModEntities.LIGHTNINGDAVE, LilDaveEntity.setAttributes());
 
+		FabricDefaultAttributeRegistry.register(ModEntities.BIGWOLF, LilDaveEntity.setAttributes());
+
 		ModItems.registerModItems();
 
 	}

@@ -18,15 +18,12 @@ import software.bernie.geckolib.animatable.instance.SingletonAnimatableInstanceC
 import software.bernie.geckolib.animation.*;
 
 
-public class TestEntity extends HostileEntity implements GeoEntity {
+public class BigWolfEntity extends HostileEntity implements GeoEntity {
 
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
-    private static final TrackedData<Boolean> IS_SHOOTING = DataTracker.registerData(TestEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
-
     private boolean isAttackWindingUp = false;
     private int windupTicks = 0;
-    private int shootingTicks = 0;
 
 
     @Override
@@ -39,14 +36,6 @@ public class TestEntity extends HostileEntity implements GeoEntity {
             if (windupTicks <= 0) {
                 performAttack();
                 isAttackWindingUp = false;
-            }
-        }
-
-        if (isShooting()) {
-            shootingTicks++;
-            if (shootingTicks > 5) {
-                setShooting(false);
-                shootingTicks = 0;
             }
         }
     }
@@ -72,22 +61,8 @@ public class TestEntity extends HostileEntity implements GeoEntity {
         return super.tryAttack(target);
     }
 
-    public TestEntity(EntityType<? extends HostileEntity> entityType, World world) {
+    public BigWolfEntity(EntityType<? extends HostileEntity> entityType, World world) {
         super(entityType, world);
-    }
-
-    @Override
-    protected void initDataTracker(DataTracker.Builder builder) {
-        super.initDataTracker(builder);
-        builder.add(IS_SHOOTING, false);
-    }
-
-    public boolean isShooting() {
-        return this.dataTracker.get(IS_SHOOTING);
-    }
-
-    public void setShooting(boolean shooting) {
-        this.dataTracker.set(IS_SHOOTING, shooting);
     }
 
     public static DefaultAttributeContainer.Builder setAttributes() {
@@ -102,7 +77,7 @@ public class TestEntity extends HostileEntity implements GeoEntity {
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
 
-        this.goalSelector.add(1, new MeleeAttackGoal(this, 0.4D, true));
+        this.goalSelector.add(1, new MeleeAttackGoal(this, 0.6D, true));
 
         this.goalSelector.add(3, new WanderAroundFarGoal(this, 0.4f, 1));
 
@@ -115,28 +90,13 @@ public class TestEntity extends HostileEntity implements GeoEntity {
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 0, this::predicate));
         controllers.add(new AnimationController<>(this, "attackController", 0, this::attackPredicate));
-        controllers.add(new AnimationController<>(this, "shootController", 0, this::shootPredicate));
     }
 
-    private PlayState shootPredicate(AnimationState<TestEntity> event) {
-
-        if (this.isShooting()) {
-            event.getController().forceAnimationReset();
-            event.getController().setAnimation(
-                    RawAnimation.begin().then("animation.goblin.shoot", Animation.LoopType.PLAY_ONCE)
-            );
-            setShooting(false);
-            return PlayState.CONTINUE;
-        }
-
-        return PlayState.CONTINUE;
-    }
-
-    private PlayState attackPredicate(AnimationState<TestEntity> event) {
+    private PlayState attackPredicate(AnimationState<BigWolfEntity> event) {
         if (this.handSwinging) {
             event.getController().forceAnimationReset();
             event.getController().setAnimation(
-                    RawAnimation.begin().then("animation.goblin.attack", Animation.LoopType.PLAY_ONCE)
+                    RawAnimation.begin().then("animation.big_wolf.attack", Animation.LoopType.PLAY_ONCE)
             );
             this.handSwinging = false;
             return PlayState.CONTINUE;
@@ -145,15 +105,15 @@ public class TestEntity extends HostileEntity implements GeoEntity {
         return PlayState.CONTINUE;
     }
 
-    private PlayState predicate(AnimationState<TestEntity> animationState) {
+    private PlayState predicate(AnimationState<BigWolfEntity> animationState) {
         var controller = animationState.getController();
 
-        if (animationState.isMoving() && !this.isShooting()) {
-            controller.setAnimation(RawAnimation.begin().then("animation.goblin.walk", Animation.LoopType.LOOP));
+        if (animationState.isMoving()) {
+            controller.setAnimation(RawAnimation.begin().then("animation.big_wolf.walk", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }
 
-        controller.setAnimation(RawAnimation.begin().then("animation.goblin.idle", Animation.LoopType.LOOP));
+        controller.setAnimation(RawAnimation.begin().then("animation.big_wolf.idle", Animation.LoopType.LOOP));
         return PlayState.CONTINUE;
     }
 

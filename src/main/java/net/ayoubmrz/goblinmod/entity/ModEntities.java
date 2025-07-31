@@ -28,7 +28,7 @@ public class ModEntities {
     public static final EntityType<FireDaveEntity> FIREDAVE = Registry.register(Registries.ENTITY_TYPE,
             Identifier.of(GoblinMod.MOD_ID, "fire_dave"),
             EntityType.Builder.create(FireDaveEntity::new, SpawnGroup.MONSTER)
-                    .dimensions(1.2f, 1.8f).build());
+                    .dimensions(1.8f, 1.2f).build());
 
     public static final EntityType<WaterDaveEntity> WATERDAVE = Registry.register(Registries.ENTITY_TYPE,
             Identifier.of(GoblinMod.MOD_ID, "water_dave"),
@@ -44,6 +44,11 @@ public class ModEntities {
             Identifier.of(GoblinMod.MOD_ID, "red_ball"),
             EntityType.Builder.<ballBallProjectileEntity>create(ballBallProjectileEntity::new, SpawnGroup.MONSTER)
                     .dimensions(0.2f, 0.2f).build());
+
+    public static final EntityType<BigWolfEntity> BIGWOLF = Registry.register(Registries.ENTITY_TYPE,
+            Identifier.of(GoblinMod.MOD_ID, "big_wolf"),
+            EntityType.Builder.create(BigWolfEntity::new, SpawnGroup.MONSTER)
+                    .dimensions(1.2f, 1.8f).build());
 
     public static void registerModEntities() {
         GoblinMod.LOGGER.info("Registering Mod Goblin for " + GoblinMod.MOD_ID);

@@ -4,6 +4,7 @@
   "item.goblinmod.fire_dave_spawn_egg": "Fire Dave Spawn Egg",
   "item.goblinmod.water_dave_spawn_egg": "Water Dave Spawn Egg",
   "item.goblinmod.lightning_dave_spawn_egg": "Lightning Dave Spawn Egg",
+  "item.goblinmod.big_wolf_spawn_egg": "Big Wolf Spawn Egg",
   "item.goblinmod.red_ball": "Red Ball",
   "item.goblinmod.blue_ball": "Blue Ball",
   "item.goblinmod.yellow_ball": "Yellow Ball",
@@ -16,5 +17,6 @@
   "entity.goblinmod.lil_dave": "Lil Dave",
   "entity.goblinmod.fire_dave": "Fire Dave",
   "entity.goblinmod.water_dave": "Water Dave",
-  "entity.goblinmod.lightning_dave": "Lightning Dave"
+  "entity.goblinmod.lightning_dave": "Lightning Dave",
+  "entity.goblinmod.big_wolf": "Big Wolf"
 }

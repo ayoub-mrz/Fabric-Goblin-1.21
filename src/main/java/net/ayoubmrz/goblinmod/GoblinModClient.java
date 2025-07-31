@@ -15,6 +15,7 @@ public class GoblinModClient implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.FIREDAVE, FireDaveRenderer::new);
         EntityRendererRegistry.register(ModEntities.WATERDAVE, WaterDaveRenderer::new);
         EntityRendererRegistry.register(ModEntities.LIGHTNINGDAVE, LightningDaveRenderer::new);
+        EntityRendererRegistry.register(ModEntities.BIGWOLF, BigWolfRenderer::new);
 
         EntityModelLayerRegistry.registerModelLayer(BoneProjectileModel.ANCIENTBONE, BoneProjectileModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.ANCIENTBONE, BoneProjectileRenderer::new);
