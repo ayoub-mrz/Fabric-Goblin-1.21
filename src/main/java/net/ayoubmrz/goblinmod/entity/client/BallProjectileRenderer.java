@@ -1,7 +1,7 @@
 package net.ayoubmrz.goblinmod.entity.client;
 
 import net.ayoubmrz.goblinmod.GoblinMod;
-import net.ayoubmrz.goblinmod.entity.custom.ballBallProjectileEntity;
+import net.ayoubmrz.goblinmod.entity.custom.BallBallProjectileEntity;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -11,7 +11,7 @@ import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 
-public class BallProjectileRenderer extends EntityRenderer<ballBallProjectileEntity> {
+public class BallProjectileRenderer extends EntityRenderer<BallBallProjectileEntity> {
     protected BallProjectileModel model;
     private static final String DEFAULT_TEXTURE = "textures/entity/red_ball.png";
 
@@ -21,7 +21,7 @@ public class BallProjectileRenderer extends EntityRenderer<ballBallProjectileEnt
     }
 
     @Override
-    public void render(ballBallProjectileEntity entity, float yaw, float tickDelta, MatrixStack matrices,
+    public void render(BallBallProjectileEntity entity, float yaw, float tickDelta, MatrixStack matrices,
                        VertexConsumerProvider vertexConsumers, int light) {
         matrices.push();
 
@@ -38,8 +38,7 @@ public class BallProjectileRenderer extends EntityRenderer<ballBallProjectileEnt
     }
 
     @Override
-    public Identifier getTexture(ballBallProjectileEntity entity) {
-        // Get texture path from entity, fallback to default if null/empty
+    public Identifier getTexture(BallBallProjectileEntity entity) {
         String texturePath = entity.getTexturePath();
         if (texturePath == null || texturePath.isEmpty()) {
             texturePath = DEFAULT_TEXTURE;

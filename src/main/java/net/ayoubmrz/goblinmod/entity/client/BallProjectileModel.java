@@ -1,7 +1,7 @@
 package net.ayoubmrz.goblinmod.entity.client;
 
 import net.ayoubmrz.goblinmod.GoblinMod;
-import net.ayoubmrz.goblinmod.entity.custom.ballBallProjectileEntity;
+import net.ayoubmrz.goblinmod.entity.custom.BallBallProjectileEntity;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.EntityModel;
@@ -9,17 +9,17 @@ import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 
-public class BallProjectileModel extends EntityModel<ballBallProjectileEntity> {
-    public static final EntityModelLayer BALL = new EntityModelLayer(Identifier.of(GoblinMod.MOD_ID, "red_ball"), "main");
-    private final ModelPart bone;
+public class BallProjectileModel extends EntityModel<BallBallProjectileEntity> {
+    public static final EntityModelLayer BALL = new EntityModelLayer(Identifier.of(GoblinMod.MOD_ID, "ball"), "main");
+    private final ModelPart ball;
 
     public BallProjectileModel(ModelPart root) {
-        this.bone = root.getChild("bone");
+        this.ball = root.getChild("ball");
     }
     public static TexturedModelData getTexturedModelData() {
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
-        ModelPartData sphere = modelPartData.addChild("bone", ModelPartBuilder.create().uv(0, 0).cuboid(-2.8066F, -15.75F, -0.2463F, 5.6131F, 31.5F, 0.4926F, new Dilation(0.0F))
+        ModelPartData ball = modelPartData.addChild("ball", ModelPartBuilder.create().uv(0, 0).cuboid(-2.8066F, -15.75F, -0.2463F, 5.6131F, 31.5F, 0.4926F, new Dilation(0.0F))
                 .uv(0, 0).cuboid(-2.3768F, -15.375F, -3.7364F, 4.7535F, 30.75F, 7.4727F, new Dilation(0.0F))
                 .uv(0, 0).cuboid(-5.6154F, -14.75F, -2.6278F, 11.2307F, 29.5F, 5.2555F, new Dilation(0.0F))
                 .uv(0, 0).cuboid(-1.5085F, -14.375F, -6.8618F, 3.0171F, 28.75F, 13.7235F, new Dilation(0.0F))
@@ -55,12 +55,12 @@ public class BallProjectileModel extends EntityModel<ballBallProjectileEntity> {
     }
 
     @Override
-    public void setAngles(ballBallProjectileEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void setAngles(BallBallProjectileEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 
     }
 
     @Override
     public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, int color) {
-        bone.render(matrices, vertexConsumer, light, overlay, color);
+        ball.render(matrices, vertexConsumer, light, overlay, color);
     }
 }

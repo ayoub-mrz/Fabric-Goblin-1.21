@@ -1,4 +1,4 @@
-// 1.21	2025-07-31T03:17:08.5078104	Goblin Mod/Model Definitions
+// 1.21	2025-07-31T09:38:05.6872991	Goblin Mod/Model Definitions
 7303511a9ba9a61e08916c85a2b89235920bc2dc assets\goblinmod\models\item\red_ball.json
 c5075ff6d40d813a23d0502d8473efe75880767b assets\goblinmod\models\item\yellow_ball.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets\goblinmod\models\item\lil_dave_spawn_egg.json
@@ -7,4 +7,5 @@ c5075ff6d40d813a23d0502d8473efe75880767b assets\goblinmod\models\item\yellow_bal
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets\goblinmod\models\item\fire_dave_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets\goblinmod\models\item\big_wolf_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets\goblinmod\models\item\water_dave_spawn_egg.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets\goblinmod\models\item\rock_golem_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets\goblinmod\models\item\goblin_spawn_egg.json

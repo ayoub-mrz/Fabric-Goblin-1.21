@@ -1,0 +1,51 @@
+{
+	"format_version": "1.21.6",
+	"credit": "Made with Blockbench",
+	"texture_size": [48, 48],
+	"textures": {
+		"0": "goblinmod:item/rock_item",
+		"particle": "goblinmod:item/rock_item"
+	},
+	"elements": [
+		{
+			"from": [3, 0, 3],
+			"to": [13, 10, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 5, 8]},
+			"faces": {
+				"north": {"uv": [3.33333, 3.33333, 6.66667, 6.66667], "texture": "#0"},
+				"east": {"uv": [0, 3.33333, 3.33333, 6.66667], "texture": "#0"},
+				"south": {"uv": [10, 3.33333, 13.33333, 6.66667], "texture": "#0"},
+				"west": {"uv": [6.66667, 3.33333, 10, 6.66667], "texture": "#0"},
+				"up": {"uv": [6.66667, 3.33333, 3.33333, 0], "texture": "#0"},
+				"down": {"uv": [10, 0, 6.66667, 3.33333], "texture": "#0"}
+			}
+		}
+	],
+	"gui_light": "front",
+	"display": {
+		"thirdperson_righthand": {
+			"scale": [0.65, 0.65, 0.65]
+		},
+		"thirdperson_lefthand": {
+			"scale": [0.65, 0.65, 0.65]
+		},
+		"ground": {
+			"translation": [0, 4.5, 0]
+		},
+		"gui": {
+			"rotation": [21, 28, 3],
+			"translation": [0, 2.75, 0]
+		},
+		"fixed": {
+			"translation": [0, 2.75, 0]
+		}
+	},
+	"groups": [
+		{
+			"name": "rock",
+			"origin": [8, 5, 8],
+			"color": 0,
+			"children": [0]
+		}
+	]
+}

@@ -25,8 +25,12 @@ public class ModItems {
     public static final Item BIG_WOLF_SPAWN_EGG = registerItem("big_wolf_spawn_egg",
             new SpawnEggItem(ModEntities.BIGWOLF, 0xf2f2f2, 0xc7c7c7, new Item.Settings()));
 
+    public static final Item ROCK_GOLEM_SPAWN_EGG = registerItem("rock_golem_spawn_egg",
+            new SpawnEggItem(ModEntities.ROCKGOLEM, 0x717577, 0x4b4f50, new Item.Settings()));
+
     public static final Item ANCIENT_BONE = registerItem("ancient_bone", new Item( new Item.Settings()));
     public static final Item COIN = registerItem("coin", new Item( new Item.Settings()));
+    public static final Item ROCKITEM = registerItem("rock_item", new Item( new Item.Settings()));
 
     public static final Item RED_BALL = registerItem("red_ball", new Item( new Item.Settings()));
     public static final Item BLUE_BALL = registerItem("blue_ball", new Item( new Item.Settings()));
@@ -47,6 +51,7 @@ public class ModItems {
             entries.add(WATER_DAVE_SPAWN_EGG);
             entries.add(LIGHTNING_DAVE_SPAWN_EGG);
             entries.add(BIG_WOLF_SPAWN_EGG);
+            entries.add(ROCK_GOLEM_SPAWN_EGG);
             entries.add(ANCIENT_BONE);
             entries.add(RED_BALL);
             entries.add(BLUE_BALL);

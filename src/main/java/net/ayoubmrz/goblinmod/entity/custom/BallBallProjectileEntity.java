@@ -24,22 +24,22 @@ import net.minecraft.world.World;
 
 import java.util.*;
 
-public class ballBallProjectileEntity extends PersistentProjectileEntity {
+public class BallBallProjectileEntity extends PersistentProjectileEntity {
     private final Set<Entity> hitEntities = new HashSet<>();
     Random random = new Random();
     private boolean hasHitPlayer = false;
     private int currentTick = 0;
     private String texturePath = "textures/entity/red_ball.png"; // default texture
     private static final TrackedData<String> TEXTURE_PATH = DataTracker.registerData(
-            ballBallProjectileEntity.class, TrackedDataHandlerRegistry.STRING);
+            BallBallProjectileEntity.class, TrackedDataHandlerRegistry.STRING);
 
     private static final String DEFAULT_TEXTURE = "textures/entity/red_ball.png";
 
-    public ballBallProjectileEntity(EntityType<? extends PersistentProjectileEntity> entityType, World world) {
+    public BallBallProjectileEntity(EntityType<? extends PersistentProjectileEntity> entityType, World world) {
         super(entityType, world);
     }
 
-    public ballBallProjectileEntity(World world, HostileEntity mob, String texturePath) {
+    public BallBallProjectileEntity(World world, HostileEntity mob, String texturePath) {
         super(ModEntities.BALL, world);
         setTexturePath(texturePath);
     }

@@ -40,15 +40,25 @@ public class ModEntities {
             EntityType.Builder.create(LightningDaveEntity::new, SpawnGroup.MONSTER)
                     .dimensions(1.2f, 1.8f).build());
 
-    public static final EntityType<ballBallProjectileEntity> BALL = Registry.register(Registries.ENTITY_TYPE,
-            Identifier.of(GoblinMod.MOD_ID, "red_ball"),
-            EntityType.Builder.<ballBallProjectileEntity>create(ballBallProjectileEntity::new, SpawnGroup.MONSTER)
-                    .dimensions(0.2f, 0.2f).build());
+    public static final EntityType<BallBallProjectileEntity> BALL = Registry.register(Registries.ENTITY_TYPE,
+            Identifier.of(GoblinMod.MOD_ID, "ball"),
+            EntityType.Builder.<BallBallProjectileEntity>create(BallBallProjectileEntity::new, SpawnGroup.MISC)
+                    .dimensions(0.4f, 0.4f).build());
 
     public static final EntityType<BigWolfEntity> BIGWOLF = Registry.register(Registries.ENTITY_TYPE,
             Identifier.of(GoblinMod.MOD_ID, "big_wolf"),
             EntityType.Builder.create(BigWolfEntity::new, SpawnGroup.MONSTER)
                     .dimensions(1.2f, 1.8f).build());
+
+    public static final EntityType<RockGolemEntity> ROCKGOLEM = Registry.register(Registries.ENTITY_TYPE,
+            Identifier.of(GoblinMod.MOD_ID, "rock_golem"),
+            EntityType.Builder.create(RockGolemEntity::new, SpawnGroup.MONSTER)
+                    .dimensions(2.6f, 3.0f).build());
+
+    public static final EntityType<RockProjectileEntity> ROCK = Registry.register(Registries.ENTITY_TYPE,
+            Identifier.of(GoblinMod.MOD_ID, "rock"),
+            EntityType.Builder.<RockProjectileEntity>create(RockProjectileEntity::new, SpawnGroup.MISC)
+                    .dimensions(1.0f, 1.0f).build());
 
     public static void registerModEntities() {
         GoblinMod.LOGGER.info("Registering Mod Goblin for " + GoblinMod.MOD_ID);
