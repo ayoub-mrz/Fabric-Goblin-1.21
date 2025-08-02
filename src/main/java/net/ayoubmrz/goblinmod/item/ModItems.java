@@ -28,9 +28,13 @@ public class ModItems {
     public static final Item ROCK_GOLEM_SPAWN_EGG = registerItem("rock_golem_spawn_egg",
             new SpawnEggItem(ModEntities.ROCKGOLEM, 0x717577, 0x4b4f50, new Item.Settings()));
 
+    public static final Item WYVERN_SPAWN_EGG = registerItem("wyvern_spawn_egg",
+            new SpawnEggItem(ModEntities.WYVERN, 0x438672, 0xebe13e, new Item.Settings()));
+
     public static final Item ANCIENT_BONE = registerItem("ancient_bone", new Item( new Item.Settings()));
     public static final Item COIN = registerItem("coin", new Item( new Item.Settings()));
     public static final Item ROCKITEM = registerItem("rock_item", new Item( new Item.Settings()));
+    public static final Item WYVERN_CLAWS = registerItem("wyvern_claws", new Item( new Item.Settings()));
 
     public static final Item RED_BALL = registerItem("red_ball", new Item( new Item.Settings()));
     public static final Item BLUE_BALL = registerItem("blue_ball", new Item( new Item.Settings()));
@@ -52,10 +56,12 @@ public class ModItems {
             entries.add(LIGHTNING_DAVE_SPAWN_EGG);
             entries.add(BIG_WOLF_SPAWN_EGG);
             entries.add(ROCK_GOLEM_SPAWN_EGG);
+            entries.add(WYVERN_SPAWN_EGG);
             entries.add(ANCIENT_BONE);
             entries.add(RED_BALL);
             entries.add(BLUE_BALL);
             entries.add(YELLOW_BALL);
+            entries.add(WYVERN_CLAWS);
         });
     }
 }

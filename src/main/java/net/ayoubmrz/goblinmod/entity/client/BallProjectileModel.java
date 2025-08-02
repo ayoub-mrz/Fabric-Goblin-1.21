@@ -1,7 +1,7 @@
 package net.ayoubmrz.goblinmod.entity.client;
 
 import net.ayoubmrz.goblinmod.GoblinMod;
-import net.ayoubmrz.goblinmod.entity.custom.BallBallProjectileEntity;
+import net.ayoubmrz.goblinmod.entity.custom.BallProjectileEntity;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.EntityModel;
@@ -9,7 +9,7 @@ import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 
-public class BallProjectileModel extends EntityModel<BallBallProjectileEntity> {
+public class BallProjectileModel extends EntityModel<BallProjectileEntity> {
     public static final EntityModelLayer BALL = new EntityModelLayer(Identifier.of(GoblinMod.MOD_ID, "ball"), "main");
     private final ModelPart ball;
 
@@ -50,12 +50,12 @@ public class BallProjectileModel extends EntityModel<BallBallProjectileEntity> {
                 .uv(0, 0).cuboid(-15.5897F, -2.0F, -2.9935F, 31.1794F, 4.0F, 5.987F, new Dilation(0.0F))
                 .uv(0, 0).cuboid(-7.1289F, -1.625F, -14.2316F, 14.2577F, 3.25F, 28.4632F, new Dilation(0.0F))
                 .uv(0, 0).cuboid(-13.6977F, -1.0F, -8.2082F, 27.3953F, 2.0F, 16.4163F, new Dilation(0.0F))
-                .uv(0, 0).cuboid(-1.8223F, -0.625F, -15.8836F, 3.6447F, 1.25F, 31.7672F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 7.0F, 0.0F));
+                .uv(0, 0).cuboid(-1.8223F, -0.625F, -15.8836F, 3.6447F, 1.25F, 31.7672F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 13.0F, 0.0F));
         return TexturedModelData.of(modelData, 32, 32);
     }
 
     @Override
-    public void setAngles(BallBallProjectileEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void setAngles(BallProjectileEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 
     }
 

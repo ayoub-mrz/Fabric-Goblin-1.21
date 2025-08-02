@@ -160,7 +160,7 @@ public class DaveMeleeAttackGoal extends Goal {
             double offsetX = -Math.sin(Math.toRadians(this.mob.getYaw())) * 0.4;
             double offsetZ = Math.cos(Math.toRadians(this.mob.getYaw())) * 0.4;
 
-            BallBallProjectileEntity ball = new BallBallProjectileEntity(this.mob.getWorld(), this.mob, texturePath());
+            BallProjectileEntity ball = new BallProjectileEntity(this.mob.getWorld(), this.mob, texturePath());
             ball.setPosition(
                     this.mob.getX() + offsetX,
                     this.mob.getY() + this.mob.getHeight() * 0.5 + 0.5,

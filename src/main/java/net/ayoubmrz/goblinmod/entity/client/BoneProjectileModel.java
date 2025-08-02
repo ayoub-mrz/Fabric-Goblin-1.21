@@ -20,7 +20,7 @@ public class BoneProjectileModel extends EntityModel<BoneProjectileEntity> {
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
         ModelPartData bone = modelPartData.addChild("bone", ModelPartBuilder.create().uv(4, 2).cuboid(-1.0F, -1.75F, 4.4571F, 1.0F, 1.0F, 1.0F, new Dilation(0.04F))
-                .uv(0, 0).cuboid(-1.0F, -10.75F, 4.4571F, 1.0F, 13.0F, 1.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 21.0F, -4.5F));
+                .uv(0, 0).cuboid(-1.0F, -10.75F, 4.4571F, 1.0F, 13.0F, 1.0F, new Dilation(0.0F)), ModelTransform.pivot(0.5F, 12.0F, -5.0F));
 
         ModelPartData cube_r1 = bone.addChild("cube_r1", ModelPartBuilder.create().uv(4, 0).cuboid(-0.5F, -4.0355F, 2.1213F, 1.0F, 1.0F, 1.0F, new Dilation(0.001F)), ModelTransform.of(-0.5F, 6.6464F, 5.1036F, 0.7854F, 0.0F, 0.0F));
 

@@ -24,6 +24,8 @@ public class RockProjectileRenderer extends EntityRenderer<RockProjectileEntity>
                        VertexConsumerProvider vertexConsumers, int light) {
         matrices.push();
 
+        matrices.scale(1.4f, 1.4f, 1.4f);
+
         VertexConsumer vertexconsumer = ItemRenderer.getDirectItemGlintConsumer(vertexConsumers,
                 this.model.getLayer(Identifier.of(GoblinMod.MOD_ID, "textures/entity/rock.png")), false, false);
         this.model.render(matrices, vertexconsumer, light, OverlayTexture.DEFAULT_UV);

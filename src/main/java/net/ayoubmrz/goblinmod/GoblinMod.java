@@ -2,6 +2,7 @@ package net.ayoubmrz.goblinmod;
 
 import net.ayoubmrz.goblinmod.entity.ModEntities;
 import net.ayoubmrz.goblinmod.entity.custom.*;
+import net.ayoubmrz.goblinmod.item.ModItemGroups;
 import net.ayoubmrz.goblinmod.item.ModItems;
 import net.fabricmc.api.ModInitializer;
 
@@ -32,7 +33,10 @@ public class GoblinMod implements ModInitializer {
 
 		FabricDefaultAttributeRegistry.register(ModEntities.ROCKGOLEM, RockGolemEntity.setAttributes());
 
+		FabricDefaultAttributeRegistry.register(ModEntities.WYVERN, WyvernEntity.setAttributes());
+
 		ModItems.registerModItems();
+		ModItemGroups.registerItemGroups();
 
 	}
 }

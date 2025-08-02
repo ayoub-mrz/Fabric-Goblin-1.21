@@ -3,6 +3,7 @@ package net.ayoubmrz.goblinmod.datagen;
 import net.ayoubmrz.goblinmod.item.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider;
+import net.minecraft.item.Items;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.condition.RandomChanceLootCondition;
@@ -144,6 +145,102 @@ public class ModLootTableProvider extends SimpleFabricLootTableProvider {
                                 .with(ItemEntry.builder(ModItems.COIN)
                                         .apply(SetCountLootFunction.builder(
                                                 UniformLootNumberProvider.create(10.0f, 20.0f)
+                                        ))
+                                )
+                        )
+        );
+
+        RegistryKey<LootTable> WolfLootTableKey = RegistryKey.of(RegistryKeys.LOOT_TABLE,
+                Identifier.of("goblinmod", "entities/big_wolf"));
+
+        consumer.accept(
+                WolfLootTableKey,
+                LootTable.builder()
+                        .pool(LootPool.builder()
+                                .rolls(ConstantLootNumberProvider.create(1))
+                                .conditionally(RandomChanceLootCondition.builder(1f))
+                                .with(ItemEntry.builder(ModItems.COIN)
+                                        .apply(SetCountLootFunction.builder(
+                                                UniformLootNumberProvider.create(5.0f, 15.0f)
+                                        ))
+                                )
+                        )
+        );
+
+        RegistryKey<LootTable> RockGolemLootTableKey = RegistryKey.of(RegistryKeys.LOOT_TABLE,
+                Identifier.of("goblinmod", "entities/rock_golem"));
+
+        consumer.accept(
+                RockGolemLootTableKey,
+                LootTable.builder()
+                        .pool(LootPool.builder()
+                                .rolls(ConstantLootNumberProvider.create(1))
+                                .conditionally(RandomChanceLootCondition.builder(1f))
+                                .with(ItemEntry.builder(ModItems.COIN)
+                                        .apply(SetCountLootFunction.builder(
+                                                UniformLootNumberProvider.create(12.0f, 16.0f)
+                                        ))
+                                )
+                        )
+                        .pool(LootPool.builder()
+                                .rolls(ConstantLootNumberProvider.create(1))
+                                .conditionally(RandomChanceLootCondition.builder(1f))
+                                .with(ItemEntry.builder(Items.COBBLED_DEEPSLATE)
+                                        .apply(SetCountLootFunction.builder(
+                                                UniformLootNumberProvider.create(5.0f, 15.0f)
+                                        ))
+                                )
+                        )
+                        .pool(LootPool.builder()
+                                .rolls(ConstantLootNumberProvider.create(1))
+                                .conditionally(RandomChanceLootCondition.builder(0.5f))
+                                .with(ItemEntry.builder(Items.FLINT)
+                                        .apply(SetCountLootFunction.builder(
+                                                UniformLootNumberProvider.create(2.0f, 4.0f)
+                                        ))
+                                )
+                        )
+                        .pool(LootPool.builder()
+                                .rolls(ConstantLootNumberProvider.create(1))
+                                .conditionally(RandomChanceLootCondition.builder(0.1f))
+                                .with(ItemEntry.builder(Items.IRON_ORE)
+                                        .apply(SetCountLootFunction.builder(
+                                                UniformLootNumberProvider.create(1.0f, 2.0f)
+                                        ))
+                                )
+                        )
+        );
+
+        RegistryKey<LootTable> WyvernLootTableKey = RegistryKey.of(RegistryKeys.LOOT_TABLE,
+                Identifier.of("goblinmod", "entities/wyvern"));
+
+        consumer.accept(
+                WyvernLootTableKey,
+                LootTable.builder()
+                        .pool(LootPool.builder()
+                                .rolls(ConstantLootNumberProvider.create(1))
+                                .conditionally(RandomChanceLootCondition.builder(1f))
+                                .with(ItemEntry.builder(ModItems.COIN)
+                                        .apply(SetCountLootFunction.builder(
+                                                UniformLootNumberProvider.create(15.0f, 30.0f)
+                                        ))
+                                )
+                        )
+                        .pool(LootPool.builder()
+                                .rolls(ConstantLootNumberProvider.create(1))
+                                .conditionally(RandomChanceLootCondition.builder(0.1f))
+                                .with(ItemEntry.builder(Items.GOLD_INGOT)
+                                        .apply(SetCountLootFunction.builder(
+                                                UniformLootNumberProvider.create(2.0f, 8.0f)
+                                        ))
+                                )
+                        )
+                        .pool(LootPool.builder()
+                                .rolls(ConstantLootNumberProvider.create(1))
+                                .conditionally(RandomChanceLootCondition.builder(0.05f))
+                                .with(ItemEntry.builder(ModItems.WYVERN_CLAWS)
+                                        .apply(SetCountLootFunction.builder(
+                                                UniformLootNumberProvider.create(1.0f, 1.0f)
                                         ))
                                 )
                         )

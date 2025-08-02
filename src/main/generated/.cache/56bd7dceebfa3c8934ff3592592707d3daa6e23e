@@ -1,11 +1,13 @@
-// 1.21	2025-07-31T09:38:05.6872991	Goblin Mod/Model Definitions
+// 1.21	2025-08-02T18:48:14.8502739	Goblin Mod/Model Definitions
 7303511a9ba9a61e08916c85a2b89235920bc2dc assets\goblinmod\models\item\red_ball.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets\goblinmod\models\item\wyvern_spawn_egg.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets\goblinmod\models\item\rock_golem_spawn_egg.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets\goblinmod\models\item\goblin_spawn_egg.json
 c5075ff6d40d813a23d0502d8473efe75880767b assets\goblinmod\models\item\yellow_ball.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets\goblinmod\models\item\lil_dave_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets\goblinmod\models\item\lightning_dave_spawn_egg.json
+38169a2a84a70ccdc72bf66c221b5997d705e503 assets\goblinmod\models\item\wyvern_claws.json
 84abd09eabe783bf70d4e5104147a031958ba165 assets\goblinmod\models\item\blue_ball.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets\goblinmod\models\item\fire_dave_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets\goblinmod\models\item\big_wolf_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets\goblinmod\models\item\water_dave_spawn_egg.json
-63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets\goblinmod\models\item\rock_golem_spawn_egg.json
-63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets\goblinmod\models\item\goblin_spawn_egg.json

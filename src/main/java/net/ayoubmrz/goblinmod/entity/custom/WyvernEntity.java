@@ -17,28 +17,30 @@ import software.bernie.geckolib.animation.*;
 import software.bernie.geckolib.animation.AnimationState;
 
 
-public class GoblinEntity extends HostileEntity implements GeoEntity {
+public class WyvernEntity extends HostileEntity implements GeoEntity, IShootable {
 
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
-    private static final TrackedData<Boolean> IS_SHOOTING = DataTracker.registerData(GoblinEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+    private static final TrackedData<Boolean> IS_SHOOTING = DataTracker.registerData(WyvernEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 
-    private boolean isAttackWindingUp = false;
-    private int windupTicks = 0;
     private int shootingTicks = 0;
+    private final String TEXTUREPATH = "textures/entity/white_ball.png";
 
+    public WyvernEntity(EntityType<? extends HostileEntity> entityType, World world) {
+        super(entityType, world);
+    }
 
     @Override
     public void tick() {
         super.tick();
 
-        if (isAttackWindingUp) {
-            windupTicks--;
+        if (!this.getWorld().isClient) {
+            ProjectileUtils.processPendingCleanups();
+        }
 
-            if (windupTicks <= 0) {
-                performAttack();
-                isAttackWindingUp = false;
-            }
+        // Handle flying behavior
+        if (!this.isOnGround()) {
+            this.setVelocity(this.getVelocity().multiply(1.0, 0.6, 1.0));
         }
 
         if (isShooting()) {
@@ -48,31 +50,7 @@ public class GoblinEntity extends HostileEntity implements GeoEntity {
                 shootingTicks = 0;
             }
         }
-    }
 
-    public void startAttackWindup() {
-        this.isAttackWindingUp = true;
-        this.windupTicks = 10;
-    }
-
-    private void performAttack() {
-        LivingEntity target = this.getTarget();
-        if (this.isAlive() && target != null && this.canSee(target)) {
-            this.tryAttack(target);
-        }
-    }
-
-    @Override
-    public boolean tryAttack(Entity target) {
-        if (!isAttackWindingUp) {
-            startAttackWindup();
-            return false;
-        }
-        return super.tryAttack(target);
-    }
-
-    public GoblinEntity(EntityType<? extends HostileEntity> entityType, World world) {
-        super(entityType, world);
     }
 
     @Override
@@ -89,10 +67,13 @@ public class GoblinEntity extends HostileEntity implements GeoEntity {
         this.dataTracker.set(IS_SHOOTING, shooting);
     }
 
+    public String getTexturePath() {return TEXTUREPATH;}
+
     public static DefaultAttributeContainer.Builder setAttributes() {
         return HostileEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 1.0D)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0F)
+                .add(EntityAttributes.GENERIC_FALL_DAMAGE_MULTIPLIER, 0.0F)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 35.0F);
     }
 
@@ -100,7 +81,7 @@ public class GoblinEntity extends HostileEntity implements GeoEntity {
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
 
-        this.goalSelector.add(1, new GoblinMeleeAttackGoal(this, 0.4D, true));
+        this.goalSelector.add(1, new WyvernAttackGoal(this, 0.4D, true));
 
         this.goalSelector.add(3, new WanderAroundFarGoal(this, 0.4f, 1));
 
@@ -112,16 +93,16 @@ public class GoblinEntity extends HostileEntity implements GeoEntity {
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 0, this::predicate));
-        controllers.add(new AnimationController<>(this, "attackController", 0, this::attackPredicate));
         controllers.add(new AnimationController<>(this, "shootController", 0, this::shootPredicate));
     }
 
-    private PlayState shootPredicate(AnimationState<GoblinEntity> event) {
+    private PlayState shootPredicate(AnimationState<WyvernEntity> event) {
 
         if (this.isShooting()) {
+            System.out.println("is shooting");
             event.getController().forceAnimationReset();
             event.getController().setAnimation(
-                    RawAnimation.begin().then("animation.goblin.shoot", Animation.LoopType.PLAY_ONCE)
+                    RawAnimation.begin().then("animation.wyvern.shoot", Animation.LoopType.PLAY_ONCE)
             );
             setShooting(false);
             return PlayState.CONTINUE;
@@ -130,28 +111,19 @@ public class GoblinEntity extends HostileEntity implements GeoEntity {
         return PlayState.CONTINUE;
     }
 
-    private PlayState attackPredicate(AnimationState<GoblinEntity> event) {
-        if (this.handSwinging) {
-            event.getController().forceAnimationReset();
-            event.getController().setAnimation(
-                    RawAnimation.begin().then("animation.goblin.attack", Animation.LoopType.PLAY_ONCE)
-            );
-            this.handSwinging = false;
-            return PlayState.CONTINUE;
-        }
-
-        return PlayState.CONTINUE;
-    }
-
-    private PlayState predicate(AnimationState<GoblinEntity> animationState) {
+    private PlayState predicate(AnimationState<WyvernEntity> animationState) {
         var controller = animationState.getController();
 
-        if (animationState.isMoving() && !this.isShooting()) {
-            controller.setAnimation(RawAnimation.begin().then("animation.goblin.walk", Animation.LoopType.LOOP));
+        if(!this.isOnGround()) {
+            controller.setAnimation(RawAnimation.begin().then("animation.wyvern.fly", Animation.LoopType.LOOP));
+            return PlayState.CONTINUE;
+        }
+        if(animationState.isMoving() && this.isOnGround()) {
+            controller.setAnimation(RawAnimation.begin().then("animation.wyvern.walk", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }
 
-        controller.setAnimation(RawAnimation.begin().then("animation.goblin.idle", Animation.LoopType.LOOP));
+        controller.setAnimation(RawAnimation.begin().then("animation.wyvern.idle", Animation.LoopType.LOOP));
         return PlayState.CONTINUE;
     }
 

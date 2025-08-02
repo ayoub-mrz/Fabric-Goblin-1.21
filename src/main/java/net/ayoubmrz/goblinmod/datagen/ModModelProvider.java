@@ -39,9 +39,13 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.ROCK_GOLEM_SPAWN_EGG,
                 new Model(Optional.of(Identifier.of("item/template_spawn_egg")), Optional.empty()));
 
+        itemModelGenerator.register(ModItems.WYVERN_SPAWN_EGG,
+                new Model(Optional.of(Identifier.of("item/template_spawn_egg")), Optional.empty()));
+
         itemModelGenerator.register(ModItems.RED_BALL, Models.GENERATED);
         itemModelGenerator.register(ModItems.BLUE_BALL, Models.GENERATED);
         itemModelGenerator.register(ModItems.YELLOW_BALL, Models.GENERATED);
+        itemModelGenerator.register(ModItems.WYVERN_CLAWS, Models.GENERATED);
 
     }
 }

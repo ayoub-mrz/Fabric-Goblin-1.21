@@ -1,6 +1,9 @@
-// 1.21	2025-07-31T09:38:05.6892973	Goblin Mod/minecraft:entity Loot Table
+// 1.21	2025-08-02T18:48:14.8532725	Goblin Mod/minecraft:entity Loot Table
 ab92665574bf0e81f6c6af349625bd89a89350e9 data\goblinmod\loot_table\entities\lightning_dave.json
+14b8ea49b4df0bc9eb856a0a9be35f6f48e726bd data\goblinmod\loot_table\entities\rock_golem.json
 748fa8dcd1e1998301a55e6e34e308e68a25703e data\goblinmod\loot_table\entities\water_dave.json
+e78ec8193c42b95b801cace6b31c134ccf431d73 data\goblinmod\loot_table\entities\wyvern.json
 a6d18b0d28c4d85e1431f57b3c9c9a8a00c9c7dc data\goblinmod\loot_table\entities\lil_dave.json
 c77fd9df912c740ec348f67d04ffdc082b1c4572 data\goblinmod\loot_table\entities\goblin.json
 0007255282d7dabff13631e0ead657f7a057638d data\goblinmod\loot_table\entities\fire_dave.json
+1a40c626a59f049cfd674c40fa0ae57de983eb89 data\goblinmod\loot_table\entities\big_wolf.json

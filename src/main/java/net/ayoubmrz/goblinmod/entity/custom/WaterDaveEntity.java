@@ -94,7 +94,6 @@ public class WaterDaveEntity extends HostileEntity implements GeoEntity, IShoota
     public static DefaultAttributeContainer.Builder setAttributes() {
         return HostileEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 1.0D)
-//                .add(EntityAttributes.GENERIC_MAX_HEALTH, 25.0D)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0F)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 35.0F);
     }
