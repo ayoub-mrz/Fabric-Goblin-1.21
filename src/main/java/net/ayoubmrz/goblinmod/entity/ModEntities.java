@@ -65,6 +65,11 @@ public class ModEntities {
             EntityType.Builder.<RockProjectileEntity>create(RockProjectileEntity::new, SpawnGroup.MISC)
                     .dimensions(0.9f, 0.9f).build());
 
+    public static final EntityType<SmallRockProjectileEntity> SMALLROCK = Registry.register(Registries.ENTITY_TYPE,
+            Identifier.of(GoblinMod.MOD_ID, "small_rock"),
+            EntityType.Builder.<SmallRockProjectileEntity>create(SmallRockProjectileEntity::new, SpawnGroup.MISC)
+                    .dimensions(0.2f, 0.2f).build());
+
     public static void registerModEntities() {
         GoblinMod.LOGGER.info("Registering Mod Goblin for " + GoblinMod.MOD_ID);
     }

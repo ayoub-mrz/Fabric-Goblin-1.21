@@ -2,6 +2,7 @@ package net.ayoubmrz.goblinmod.entity.custom;
 
 import net.ayoubmrz.goblinmod.entity.ModEntities;
 import net.ayoubmrz.goblinmod.item.ModItems;
+import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -14,6 +15,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.particle.BlockStateParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
@@ -100,8 +102,34 @@ public class BallProjectileEntity extends PersistentProjectileEntity {
         }
     }
 
+
     @Override
     protected void onBlockHit(BlockHitResult blockHitResult) {
+        if (!this.getWorld().isClient) {
+            BlockPos hitPos = blockHitResult.getBlockPos();
+            ServerWorld serverWorld = (ServerWorld) this.getWorld();
+
+            // Create explosion
+            this.getWorld().createExplosion(
+                    this,
+                    hitPos.getX() + 0.5,
+                    hitPos.getY() + 2.5,
+                    hitPos.getZ() + 0.5,
+                    2.0f,
+                    true,
+                    World.ExplosionSourceType.MOB
+            );
+
+            // Spawn additional particle effects
+            serverWorld.spawnParticles(
+                    ParticleTypes.EXPLOSION,
+                    hitPos.getX() + 0.5, hitPos.getY() + 0.5, hitPos.getZ() + 0.5,
+                    3, 0.2, 0.2, 0.2, 0.1
+            );
+
+        }
+        System.out.println(this.getTexturePath());
+
         this.discard();
         super.onBlockHit(blockHitResult);
     }

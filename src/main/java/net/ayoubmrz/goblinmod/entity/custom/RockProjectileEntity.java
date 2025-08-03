@@ -13,6 +13,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import java.util.HashSet;
@@ -45,6 +46,40 @@ public class RockProjectileEntity extends PersistentProjectileEntity {
     @Override
     protected void onBlockHit(BlockHitResult blockHitResult) {
         super.onBlockHit(blockHitResult);
+
+        if (!this.getWorld().isClient) {
+            Vec3d hitPos = blockHitResult.getPos();
+
+            // Spawn 5 small entities around the impact point
+            for (int i = 0; i < 7; i++) {
+                SmallRockProjectileEntity smallRock = new SmallRockProjectileEntity(ModEntities.SMALLROCK, this.getWorld());
+
+                // Calculate spread position around the hit point
+                double angle = (i * 72.0) * Math.PI / 180.0;
+                double spreadRadius = 1.4;
+
+                double offsetX = Math.cos(angle) * spreadRadius;
+                double offsetZ = Math.sin(angle) * spreadRadius;
+                double offsetY = 0.7;
+
+                // Set position with spread
+                smallRock.setPosition(
+                        hitPos.x + offsetX,
+                        hitPos.y + offsetY,
+                        hitPos.z + offsetZ
+                );
+
+                double velocityStrength = 0.2;
+                smallRock.setVelocity(
+                        (Math.random() - 0.5) * velocityStrength,
+                        Math.random() * 0.3,
+                        (Math.random() - 0.5) * velocityStrength
+                );
+
+                this.getWorld().spawnEntity(smallRock);
+            }
+        }
+
         this.discard();
     }
 

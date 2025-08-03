@@ -28,7 +28,6 @@ public class RockGolemEntity extends HostileEntity implements GeoEntity {
     private int windupTicks = 0;
     private int shootingTicks = 0;
 
-
     @Override
     public void tick() {
         super.tick();
@@ -90,24 +89,31 @@ public class RockGolemEntity extends HostileEntity implements GeoEntity {
         this.dataTracker.set(IS_SHOOTING, shooting);
     }
 
+    @Override
+    public boolean isPushable() {
+        if (this instanceof RockGolemEntity) {
+            return false;
+        }
+        return super.isPushable();
+    }
+
     public static DefaultAttributeContainer.Builder setAttributes() {
         return HostileEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 120.0D)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 15.0F)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 35.0F)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, (double)0.25F)
-                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, (double)1.0F)
-                .add(EntityAttributes.GENERIC_STEP_HEIGHT, (double)1.0F);
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25F)
+                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 1.0F);
     }
 
     @Override
     protected void initGoals() {
-        this.goalSelector.add(1, new SwimGoal(this));
-        this.goalSelector.add(2, new RockGolemMeleeAttackGoal(this, 0.6F, true));
-        this.goalSelector.add(7, new WanderAroundFarGoal(this, 1));
-        this.goalSelector.add(8, new LookAroundGoal(this));
+        this.goalSelector.add(0, new SwimGoal(this));
+        this.goalSelector.add(1, new RockGolemMeleeAttackGoal(this, 0.6D, true));
+        this.goalSelector.add(3, new WanderAroundFarGoal(this, 0.4f, 1));
+        this.goalSelector.add(4, new LookAroundGoal(this));
+        this.goalSelector.add(1, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
         this.targetSelector.add(1, new RevengeGoal(this, new Class[0]));
-        this.targetSelector.add(2, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
     }
 
     @Override

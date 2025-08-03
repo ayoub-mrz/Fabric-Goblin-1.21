@@ -28,5 +28,8 @@ public class GoblinModClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(RockProjectileModel.ROCK, RockProjectileModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.ROCK, RockProjectileRenderer::new);
 
+        EntityModelLayerRegistry.registerModelLayer(SmallRockProjectileModel.SMALLROCK, SmallRockProjectileModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.SMALLROCK, SmallRockProjectileRenderer::new);
+
     }
 }

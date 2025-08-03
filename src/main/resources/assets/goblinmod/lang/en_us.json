@@ -30,6 +30,7 @@
   "entity.goblinmod.ancient_bone": "Ancient Bone",
   "entity.goblinmod.ball": "Ball",
   "entity.goblinmod.rock": "Rock",
+  "entity.goblinmod.small_rock": "Small Rock",
 
   "itemgroup.goblinmod.muck_mobs": "Muck Mobs"
 }
