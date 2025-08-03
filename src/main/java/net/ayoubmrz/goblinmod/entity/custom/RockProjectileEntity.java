@@ -10,6 +10,8 @@ import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.world.World;
 
@@ -34,6 +36,19 @@ public class RockProjectileEntity extends PersistentProjectileEntity {
     }
 
     @Override
+    public void playSound(SoundEvent sound, float volume, float pitch) {
+        if(false) {
+            super.playSound(sound, volume, pitch);
+        }
+    }
+
+    @Override
+    protected void onBlockHit(BlockHitResult blockHitResult) {
+        super.onBlockHit(blockHitResult);
+        this.discard();
+    }
+
+    @Override
     protected void onEntityHit(EntityHitResult entityHitResult) {
         Entity hitEntity = entityHitResult.getEntity();
 
@@ -44,7 +59,7 @@ public class RockProjectileEntity extends PersistentProjectileEntity {
         hitEntities.add(hitEntity);
 
         if (hitEntity instanceof PlayerEntity player) {
-            player.damage(this.getDamageSources().thrown(this, this.getOwner()), 4.0f);
+            player.damage(this.getDamageSources().thrown(this, this.getOwner()), 20.0f);
             hasHitPlayer = true;
 
             if (!this.getWorld().isClient) {

@@ -70,7 +70,7 @@ public class BoneProjectileEntity extends PersistentProjectileEntity {
         hitEntities.add(hitEntity);
 
         if (hitEntity instanceof PlayerEntity player) {
-            player.damage(this.getDamageSources().thrown(this, this.getOwner()), 4.0f);
+            player.damage(this.getDamageSources().thrown(this, this.getOwner()), 6.0f);
             hasHitPlayer = true;
 
             if (!this.getWorld().isClient) {

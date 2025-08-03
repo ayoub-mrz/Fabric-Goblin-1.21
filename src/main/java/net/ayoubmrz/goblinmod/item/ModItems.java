@@ -40,6 +40,9 @@ public class ModItems {
     public static final Item BLUE_BALL = registerItem("blue_ball", new Item( new Item.Settings()));
     public static final Item YELLOW_BALL = registerItem("yellow_ball", new Item( new Item.Settings()));
 
+    public static final Item SWORD_HILT = registerItem("sword_hilt", new Item( new Item.Settings()));
+    public static final Item BLADE = registerItem("blade", new Item( new Item.Settings()));
+
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, Identifier.of(GoblinMod.MOD_ID, name), item);
@@ -49,6 +52,15 @@ public class ModItems {
         GoblinMod.LOGGER.info("Registering Mod Items for " + GoblinMod.MOD_ID);
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {
+            entries.add(ANCIENT_BONE);
+            entries.add(RED_BALL);
+            entries.add(BLUE_BALL);
+            entries.add(YELLOW_BALL);
+            entries.add(WYVERN_CLAWS);
+            entries.add(SWORD_HILT);
+            entries.add(BLADE);
+        });
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.SPAWN_EGGS).register(entries -> {
             entries.add(GOBLIN_SPAWN_EGG);
             entries.add(LIL_DAVE_SPAWN_EGG);
             entries.add(FIRE_DAVE_SPAWN_EGG);
@@ -57,11 +69,6 @@ public class ModItems {
             entries.add(BIG_WOLF_SPAWN_EGG);
             entries.add(ROCK_GOLEM_SPAWN_EGG);
             entries.add(WYVERN_SPAWN_EGG);
-            entries.add(ANCIENT_BONE);
-            entries.add(RED_BALL);
-            entries.add(BLUE_BALL);
-            entries.add(YELLOW_BALL);
-            entries.add(WYVERN_CLAWS);
         });
     }
 }

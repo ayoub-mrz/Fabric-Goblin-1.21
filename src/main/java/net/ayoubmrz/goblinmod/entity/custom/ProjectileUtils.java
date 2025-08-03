@@ -26,9 +26,6 @@ public class ProjectileUtils {
         }
     }
 
-    /**
-     * Schedule a light block cleanup after a delay (thread-safe)
-     */
     public static void cleanupLightAfterDelay(World world, BlockPos pos, int delayTicks) {
         if (world.isClient) return;
 

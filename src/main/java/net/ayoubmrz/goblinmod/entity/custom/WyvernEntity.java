@@ -71,23 +71,20 @@ public class WyvernEntity extends HostileEntity implements GeoEntity, IShootable
 
     public static DefaultAttributeContainer.Builder setAttributes() {
         return HostileEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 1.0D)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0F)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 60.0D)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 6.0F)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.4F)
                 .add(EntityAttributes.GENERIC_FALL_DAMAGE_MULTIPLIER, 0.0F)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 35.0F);
     }
 
     @Override
     protected void initGoals() {
-        this.goalSelector.add(0, new SwimGoal(this));
-
-        this.goalSelector.add(1, new WyvernAttackGoal(this, 0.4D, true));
-
-        this.goalSelector.add(3, new WanderAroundFarGoal(this, 0.4f, 1));
-
-        this.goalSelector.add(4, new LookAroundGoal(this));
-
-        this.goalSelector.add(1, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
+        this.goalSelector.add(1, new SwimGoal(this));
+        this.goalSelector.add(2, new WyvernAttackGoal(this, 0.4D, true));
+        this.goalSelector.add(7, new WanderAroundFarGoal(this, 1));
+        this.goalSelector.add(8, new LookAroundGoal(this));
+        this.targetSelector.add(1, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
     }
 
     @Override

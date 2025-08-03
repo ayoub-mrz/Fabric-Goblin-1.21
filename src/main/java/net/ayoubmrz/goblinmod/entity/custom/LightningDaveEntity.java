@@ -36,6 +36,10 @@ public class LightningDaveEntity extends HostileEntity implements GeoEntity, ISh
     public void tick() {
         super.tick();
 
+        if (!this.getWorld().isClient) {
+            ProjectileUtils.processPendingCleanups();
+        }
+
         if (isAttackWindingUp) {
             windupTicks--;
 
@@ -93,22 +97,17 @@ public class LightningDaveEntity extends HostileEntity implements GeoEntity, ISh
 
     public static DefaultAttributeContainer.Builder setAttributes() {
         return HostileEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 1.0D)
-//                .add(EntityAttributes.GENERIC_MAX_HEALTH, 25.0D)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0F)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 80.0D)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.6F)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 35.0F);
     }
 
     @Override
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
-
         this.goalSelector.add(1, new DaveMeleeAttackGoal(this, 0.4D, true));
-
         this.goalSelector.add(3, new WanderAroundFarGoal(this, 0.4f, 1));
-
         this.goalSelector.add(4, new LookAroundGoal(this));
-
         this.goalSelector.add(1, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
     }
 
@@ -135,7 +134,7 @@ public class LightningDaveEntity extends HostileEntity implements GeoEntity, ISh
     private PlayState predicate(AnimationState<LightningDaveEntity> animationState) {
         var controller = animationState.getController();
 
-        if (animationState.isMoving() && !this.isShooting()) {
+        if (animationState.isMoving()) {
             controller.setAnimation(RawAnimation.begin().then("animation.lil_dave.walk", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }

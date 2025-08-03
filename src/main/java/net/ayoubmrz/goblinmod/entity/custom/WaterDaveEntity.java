@@ -36,6 +36,10 @@ public class WaterDaveEntity extends HostileEntity implements GeoEntity, IShoota
     public void tick() {
         super.tick();
 
+        if (!this.getWorld().isClient) {
+            ProjectileUtils.processPendingCleanups();
+        }
+
         if (isAttackWindingUp) {
             windupTicks--;
 
@@ -93,8 +97,8 @@ public class WaterDaveEntity extends HostileEntity implements GeoEntity, IShoota
 
     public static DefaultAttributeContainer.Builder setAttributes() {
         return HostileEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 1.0D)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0F)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 80.0D)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.6F)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 35.0F);
     }
 

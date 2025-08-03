@@ -11,9 +11,9 @@ import net.minecraft.util.Identifier;
 
 public class ModItemGroups {
 
-    public static final ItemGroup MITHRIL_EQUIPMENTS_GROUP = Registry.register(Registries.ITEM_GROUP,
+    public static final ItemGroup MUCK_MOBS_GROUP = Registry.register(Registries.ITEM_GROUP,
             Identifier.of(GoblinMod.MOD_ID, "muck_mobs"),
-            FabricItemGroup.builder().icon(() -> new ItemStack(ModItems.RED_BALL))
+            FabricItemGroup.builder().icon(() -> new ItemStack(ModItems.WYVERN_CLAWS))
                     .displayName(Text.translatable("itemgroup.goblinmod.muck_mobs"))
                     .entries((displayContext, entries) -> {
 
@@ -29,7 +29,13 @@ public class ModItemGroups {
                         entries.add(ModItems.RED_BALL);
                         entries.add(ModItems.BLUE_BALL);
                         entries.add(ModItems.YELLOW_BALL);
+
+                        entries.add(ModItems.ANCIENT_BONE);
                         entries.add(ModItems.WYVERN_CLAWS);
+                        entries.add(ModItems.COIN);
+
+                        entries.add(ModItems.SWORD_HILT);
+                        entries.add(ModItems.BLADE);
 
                     }).build());
 

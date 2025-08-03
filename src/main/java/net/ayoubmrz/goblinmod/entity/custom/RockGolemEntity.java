@@ -92,8 +92,8 @@ public class RockGolemEntity extends HostileEntity implements GeoEntity {
 
     public static DefaultAttributeContainer.Builder setAttributes() {
         return HostileEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 100.0D)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0F)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 120.0D)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 15.0F)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 35.0F)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, (double)0.25F)
                 .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, (double)1.0F)
@@ -102,17 +102,12 @@ public class RockGolemEntity extends HostileEntity implements GeoEntity {
 
     @Override
     protected void initGoals() {
-
-        this.goalSelector.add(1, new RockGolemMeleeAttackGoal(this, 0.8D, true));
-
-        this.goalSelector.add(3, new WanderAroundFarGoal(this, 0.6f, 1));
-
-        this.goalSelector.add(4, new LookAroundGoal(this));
-
-        this.goalSelector.add(1, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
-
+        this.goalSelector.add(1, new SwimGoal(this));
+        this.goalSelector.add(2, new RockGolemMeleeAttackGoal(this, 0.6F, true));
+        this.goalSelector.add(7, new WanderAroundFarGoal(this, 1));
+        this.goalSelector.add(8, new LookAroundGoal(this));
         this.targetSelector.add(1, new RevengeGoal(this, new Class[0]));
-
+        this.targetSelector.add(2, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
     }
 
     @Override

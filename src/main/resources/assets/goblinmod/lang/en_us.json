@@ -8,13 +8,15 @@
   "item.goblinmod.rock_golem_spawn_egg": "Rock Golem Spawn Egg",
   "item.goblinmod.wyvern_spawn_egg": "Wyvern Spawn Egg",
 
-  "item.goblinmod.red_ball": "Red Ball",
-  "item.goblinmod.blue_ball": "Blue Ball",
-  "item.goblinmod.yellow_ball": "Yellow Ball",
+  "item.goblinmod.red_ball": "Fire Ball",
+  "item.goblinmod.blue_ball": "Water Ball",
+  "item.goblinmod.yellow_ball": "Lightning Ball",
   "item.goblinmod.ancient_bone": "Ancient Bone",
   "item.goblinmod.coin": "Coin",
   "item.goblinmod.rock": "Rock",
   "item.goblinmod.wyvern_claws": "Wyvern Claws",
+  "item.goblinmod.sword_hilt": "Sword Hilt",
+  "item.goblinmod.blade": "Blade",
 
   "entity.goblinmod.goblin": "Goblin",
   "entity.goblinmod.lil_dave": "Lil Dave",

@@ -117,7 +117,7 @@ public class BallProjectileEntity extends PersistentProjectileEntity {
         hitEntities.add(hitEntity);
 
         if (hitEntity instanceof PlayerEntity player) {
-            player.damage(this.getDamageSources().thrown(this, this.getOwner()), 4.0f);
+            player.damage(this.getDamageSources().thrown(this, this.getOwner()), 14.0f);
             player.setOnFireFor(random.nextInt(4, 7));
             hasHitPlayer = true;
             this.discard();
