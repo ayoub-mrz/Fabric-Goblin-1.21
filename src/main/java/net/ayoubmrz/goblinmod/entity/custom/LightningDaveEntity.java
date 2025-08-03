@@ -36,10 +36,6 @@ public class LightningDaveEntity extends HostileEntity implements GeoEntity, ISh
     public void tick() {
         super.tick();
 
-        if (!this.getWorld().isClient) {
-            ProjectileUtils.processPendingCleanups();
-        }
-
         if (isAttackWindingUp) {
             windupTicks--;
 

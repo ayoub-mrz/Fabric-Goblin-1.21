@@ -6,11 +6,14 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
@@ -23,12 +26,19 @@ public class BigWolfEntity extends HostileEntity implements GeoEntity {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
     private boolean isAttackWindingUp = false;
+    private int countTicks = 0;
     private int windupTicks = 0;
 
 
     @Override
     public void tick() {
         super.tick();
+
+        countTicks++;
+        if (countTicks >= 100) {
+            this.playSound(SoundEvents.ENTITY_WOLF_GROWL, 0.2F, 0.7F);
+            countTicks = 0;
+        }
 
         if (isAttackWindingUp) {
             windupTicks--;
@@ -38,6 +48,12 @@ public class BigWolfEntity extends HostileEntity implements GeoEntity {
                 isAttackWindingUp = false;
             }
         }
+    }
+
+    @Override
+    public void onDeath(DamageSource damageSource) {
+        super.onDeath(damageSource);
+        this.playSound(SoundEvents.ENTITY_WOLF_DEATH, 0.2F, 0.7F);
     }
 
     public void startAttackWindup() {

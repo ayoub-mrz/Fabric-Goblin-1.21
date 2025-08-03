@@ -36,10 +36,6 @@ public class FireDaveEntity extends HostileEntity implements GeoEntity, IShootab
     public void tick() {
         super.tick();
 
-        if (!this.getWorld().isClient) {
-            ProjectileUtils.processPendingCleanups();
-        }
-
         if (isAttackWindingUp) {
             windupTicks--;
 

@@ -36,10 +36,6 @@ public class WaterDaveEntity extends HostileEntity implements GeoEntity, IShoota
     public void tick() {
         super.tick();
 
-        if (!this.getWorld().isClient) {
-            ProjectileUtils.processPendingCleanups();
-        }
-
         if (isAttackWindingUp) {
             windupTicks--;
 

@@ -9,6 +9,7 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
@@ -24,6 +25,7 @@ public class WyvernEntity extends HostileEntity implements GeoEntity, IShootable
     private static final TrackedData<Boolean> IS_SHOOTING = DataTracker.registerData(WyvernEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 
     private int shootingTicks = 0;
+    private int wingFlapTicks = 0;
     private final String TEXTUREPATH = "textures/entity/white_ball.png";
 
     public WyvernEntity(EntityType<? extends HostileEntity> entityType, World world) {
@@ -34,13 +36,18 @@ public class WyvernEntity extends HostileEntity implements GeoEntity, IShootable
     public void tick() {
         super.tick();
 
-        if (!this.getWorld().isClient) {
-            ProjectileUtils.processPendingCleanups();
-        }
-
         // Handle flying behavior
         if (!this.isOnGround()) {
             this.setVelocity(this.getVelocity().multiply(1.0, 0.6, 1.0));
+
+            // Play wing flap sounds while flying
+            wingFlapTicks++;
+            if (wingFlapTicks >= 20) {
+                this.playSound(SoundEvents.ENTITY_ENDER_DRAGON_FLAP, 0.2F, 1.4F);
+                wingFlapTicks = 0;
+            }
+        } else {
+            wingFlapTicks = 0;
         }
 
         if (isShooting()) {

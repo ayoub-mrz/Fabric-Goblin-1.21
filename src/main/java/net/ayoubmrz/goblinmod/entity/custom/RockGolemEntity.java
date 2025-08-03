@@ -28,6 +28,7 @@ public class RockGolemEntity extends HostileEntity implements GeoEntity {
     private int windupTicks = 0;
     private int shootingTicks = 0;
 
+
     @Override
     public void tick() {
         super.tick();
@@ -89,21 +90,14 @@ public class RockGolemEntity extends HostileEntity implements GeoEntity {
         this.dataTracker.set(IS_SHOOTING, shooting);
     }
 
-    @Override
-    public boolean isPushable() {
-        if (this instanceof RockGolemEntity) {
-            return false;
-        }
-        return super.isPushable();
-    }
-
     public static DefaultAttributeContainer.Builder setAttributes() {
         return HostileEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 120.0D)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 15.0F)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 35.0F)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25F)
-                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 1.0F);
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.4F)
+                .add(EntityAttributes.GENERIC_FALL_DAMAGE_MULTIPLIER, 0.0F)
+                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 1.0F)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 35.0F);
     }
 
     @Override
@@ -153,7 +147,7 @@ public class RockGolemEntity extends HostileEntity implements GeoEntity {
     private PlayState predicate(AnimationState<RockGolemEntity> animationState) {
         var controller = animationState.getController();
 
-        if (animationState.isMoving() && !this.isShooting()) {
+        if (animationState.isMoving() && !this.isShooting() && !this.handSwinging) {
             controller.setAnimation(RawAnimation.begin().then("animation.rock_golem.walk", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }

@@ -18,11 +18,14 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.BlockStateParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -77,17 +80,16 @@ public class BallProjectileEntity extends PersistentProjectileEntity {
     @Override
     public void tick() {
         super.tick();
+
+        if(currentTick == 0) {
+            playLaunchSound();
+        }
         ++currentTick;
 
         if(currentTick >= 100) {
             this.discard();
         }
-        BlockPos currentPos = this.getBlockPos();
 
-        if (this.getWorld().getBlockState(currentPos).isAir()) {
-            this.getWorld().setBlockState(currentPos, Blocks.LIGHT.getDefaultState());
-            ProjectileUtils.cleanupLightAfterDelay(this.getWorld(), currentPos, 2);
-        }
     }
 
    @Override
@@ -102,10 +104,9 @@ public class BallProjectileEntity extends PersistentProjectileEntity {
         }
     }
 
-
     @Override
     protected void onBlockHit(BlockHitResult blockHitResult) {
-        if (!this.getWorld().isClient) {
+        if (!this.getWorld().isClient && !this.getTexturePath().equals("textures/entity/white_ball.png")) {
             BlockPos hitPos = blockHitResult.getBlockPos();
             ServerWorld serverWorld = (ServerWorld) this.getWorld();
 
@@ -113,7 +114,7 @@ public class BallProjectileEntity extends PersistentProjectileEntity {
             this.getWorld().createExplosion(
                     this,
                     hitPos.getX() + 0.5,
-                    hitPos.getY() + 2.5,
+                    hitPos.getY() + 3,
                     hitPos.getZ() + 0.5,
                     2.0f,
                     true,
@@ -159,6 +160,19 @@ public class BallProjectileEntity extends PersistentProjectileEntity {
                 );
             }
 
+        }
+    }
+
+    public void playLaunchSound() {
+        if (!this.getWorld().isClient) {
+            this.getWorld().playSound(
+                    null,
+                    this.getX(), this.getY(), this.getZ(),
+                    SoundEvents.ENTITY_ENDER_DRAGON_SHOOT,
+                    SoundCategory.HOSTILE,
+                    1.0f,
+                    0.8f
+            );
         }
     }
 

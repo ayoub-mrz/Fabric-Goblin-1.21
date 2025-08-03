@@ -10,7 +10,10 @@ import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.Vec3d;
@@ -41,16 +44,29 @@ public class RockProjectileEntity extends PersistentProjectileEntity {
         if(false) {
             super.playSound(sound, volume, pitch);
         }
+//        this.playSound(SoundEvents.ENTITY_GENERIC_HURT, 1.0f, 1.0f);
     }
 
     @Override
     protected void onBlockHit(BlockHitResult blockHitResult) {
         super.onBlockHit(blockHitResult);
 
+
+
         if (!this.getWorld().isClient) {
             Vec3d hitPos = blockHitResult.getPos();
 
-            // Spawn 5 small entities around the impact point
+            // Play sound when hitting the ground/block
+            this.getWorld().playSound(
+                    null,
+                    hitPos.x, hitPos.y, hitPos.z,
+                    SoundEvents.ENTITY_DRAGON_FIREBALL_EXPLODE,
+                    SoundCategory.HOSTILE,
+                    1.2f,
+                    1.2f
+            );
+
+            // Spawn small entities around the impact point
             for (int i = 0; i < 7; i++) {
                 SmallRockProjectileEntity smallRock = new SmallRockProjectileEntity(ModEntities.SMALLROCK, this.getWorld());
 

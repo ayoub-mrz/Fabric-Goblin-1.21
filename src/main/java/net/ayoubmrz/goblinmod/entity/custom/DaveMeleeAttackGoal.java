@@ -193,6 +193,7 @@ public class DaveMeleeAttackGoal extends Goal {
             if (!ball.hasNoGravity()) {
                 ball.setNoGravity(true);
             }
+
             this.mob.getWorld().spawnEntity(ball);
         }
     }

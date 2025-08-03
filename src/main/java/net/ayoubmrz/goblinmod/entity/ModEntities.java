@@ -43,7 +43,7 @@ public class ModEntities {
     public static final EntityType<RockGolemEntity> ROCKGOLEM = Registry.register(Registries.ENTITY_TYPE,
             Identifier.of(GoblinMod.MOD_ID, "rock_golem"),
             EntityType.Builder.create(RockGolemEntity::new, SpawnGroup.MONSTER)
-                    .dimensions(2.5f, 2.8f).build());
+                    .dimensions(2.6f, 2.8f).build());
 
     public static final EntityType<WyvernEntity> WYVERN = Registry.register(Registries.ENTITY_TYPE,
             Identifier.of(GoblinMod.MOD_ID, "wyvern"),
