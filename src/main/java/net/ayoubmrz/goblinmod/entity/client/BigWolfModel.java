@@ -14,17 +14,17 @@ public class BigWolfModel<T extends BigWolfEntity> extends GeoModel<BigWolfEntit
 
 
     @Override
-    public Identifier getModelResource(BigWolfEntity goblinEntity) {
+    public Identifier getModelResource(BigWolfEntity bigWolfEntity) {
         return Identifier.of(GoblinMod.MOD_ID, "geo/big_wolf.geo.json");
     }
 
     @Override
-    public Identifier getTextureResource(BigWolfEntity goblinEntity) {
+    public Identifier getTextureResource(BigWolfEntity bigWolfEntity) {
         return Identifier.of(GoblinMod.MOD_ID, "textures/entity/big_wolf.png");
     }
 
     @Override
-    public Identifier getAnimationResource(BigWolfEntity goblinEntity) {
+    public Identifier getAnimationResource(BigWolfEntity bigWolfEntity) {
         return Identifier.of(GoblinMod.MOD_ID, "animations/big_wolf.animation.json");
     }
 

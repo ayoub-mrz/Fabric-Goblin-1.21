@@ -13,17 +13,17 @@ import software.bernie.geckolib.model.data.EntityModelData;
 public class LightningDaveModel<T extends LightningDaveEntity> extends GeoModel<LightningDaveEntity> {
 
     @Override
-    public Identifier getModelResource(LightningDaveEntity daveEntity) {
+    public Identifier getModelResource(LightningDaveEntity lightningDaveEntity) {
         return Identifier.of(GoblinMod.MOD_ID, "geo/lil_dave.geo.json");
     }
 
     @Override
-    public Identifier getTextureResource(LightningDaveEntity daveEntity) {
+    public Identifier getTextureResource(LightningDaveEntity lightningDaveEntity) {
         return Identifier.of(GoblinMod.MOD_ID, "textures/entity/lightning_dave.png");
     }
 
     @Override
-    public Identifier getAnimationResource(LightningDaveEntity daveEntity) {
+    public Identifier getAnimationResource(LightningDaveEntity lightningDaveEntity) {
         return Identifier.of(GoblinMod.MOD_ID, "animations/lil_dave.animation.json");
     }
 

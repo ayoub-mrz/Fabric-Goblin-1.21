@@ -2,8 +2,6 @@ package net.ayoubmrz.goblinmod.entity.custom;
 
 import net.ayoubmrz.goblinmod.entity.ModEntities;
 import net.ayoubmrz.goblinmod.item.ModItems;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -15,7 +13,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.particle.BlockStateParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -25,20 +22,18 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
 public class BallProjectileEntity extends PersistentProjectileEntity {
+    private static final String DEFAULT_TEXTURE = "textures/entity/red_ball.png";
     private final Set<Entity> hitEntities = new HashSet<>();
     Random random = new Random();
     private boolean hasHitPlayer = false;
     private int currentTick = 0;
-    private String texturePath = "textures/entity/red_ball.png"; // default texture
+    private String texturePath = DEFAULT_TEXTURE; // default texture
     private static final TrackedData<String> TEXTURE_PATH = DataTracker.registerData(
             BallProjectileEntity.class, TrackedDataHandlerRegistry.STRING);
-
-    private static final String DEFAULT_TEXTURE = "textures/entity/red_ball.png";
 
     public BallProjectileEntity(EntityType<? extends PersistentProjectileEntity> entityType, World world) {
         super(entityType, world);
@@ -97,6 +92,7 @@ public class BallProjectileEntity extends PersistentProjectileEntity {
         return new ItemStack(ModItems.RED_BALL);
     }
 
+    // Stop Sound on block hit
     @Override
     public void playSound(SoundEvent sound, float volume, float pitch) {
         if(false) {
@@ -106,6 +102,8 @@ public class BallProjectileEntity extends PersistentProjectileEntity {
 
     @Override
     protected void onBlockHit(BlockHitResult blockHitResult) {
+
+        // if this ball is not shoot from (Wyvern), create explosion
         if (!this.getWorld().isClient && !this.getTexturePath().equals("textures/entity/white_ball.png")) {
             BlockPos hitPos = blockHitResult.getBlockPos();
             ServerWorld serverWorld = (ServerWorld) this.getWorld();
@@ -129,7 +127,6 @@ public class BallProjectileEntity extends PersistentProjectileEntity {
             );
 
         }
-        System.out.println(this.getTexturePath());
 
         this.discard();
         super.onBlockHit(blockHitResult);
@@ -163,6 +160,7 @@ public class BallProjectileEntity extends PersistentProjectileEntity {
         }
     }
 
+    // Play sound on entity spawn
     public void playLaunchSound() {
         if (!this.getWorld().isClient) {
             this.getWorld().playSound(

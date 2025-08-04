@@ -7,12 +7,8 @@ import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.data.DataTracker;
-import net.minecraft.entity.data.TrackedData;
-import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -29,12 +25,16 @@ public class BigWolfEntity extends HostileEntity implements GeoEntity {
     private int countTicks = 0;
     private int windupTicks = 0;
 
+    public BigWolfEntity(EntityType<? extends HostileEntity> entityType, World world) {
+        super(entityType, world);
+    }
 
     @Override
     public void tick() {
         super.tick();
 
         countTicks++;
+        // Play angry Wolf sound every 10s
         if (countTicks >= 100) {
             this.playSound(SoundEvents.ENTITY_WOLF_GROWL, 0.2F, 0.7F);
             countTicks = 0;
@@ -50,6 +50,7 @@ public class BigWolfEntity extends HostileEntity implements GeoEntity {
         }
     }
 
+    // Play sound on death
     @Override
     public void onDeath(DamageSource damageSource) {
         super.onDeath(damageSource);
@@ -58,7 +59,7 @@ public class BigWolfEntity extends HostileEntity implements GeoEntity {
 
     public void startAttackWindup() {
         this.isAttackWindingUp = true;
-        this.windupTicks = 10;
+        this.windupTicks = 5;
     }
 
     private void performAttack() {
@@ -75,10 +76,6 @@ public class BigWolfEntity extends HostileEntity implements GeoEntity {
             return false;
         }
         return super.tryAttack(target);
-    }
-
-    public BigWolfEntity(EntityType<? extends HostileEntity> entityType, World world) {
-        super(entityType, world);
     }
 
     public static DefaultAttributeContainer.Builder setAttributes() {

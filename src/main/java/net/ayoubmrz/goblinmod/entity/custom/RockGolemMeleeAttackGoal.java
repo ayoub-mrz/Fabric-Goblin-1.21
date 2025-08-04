@@ -26,7 +26,7 @@ public class RockGolemMeleeAttackGoal extends Goal {
     private int waitForAnimation = 0;
     public boolean animationTriggered = false;
     Random random = new Random();
-    private int startShooting = random.nextInt(10, 21); // 10 - 20 sec
+    private int startShooting = random.nextInt(10, 21);
 
     public RockGolemMeleeAttackGoal(RockGolemEntity mob, double speed, boolean pauseWhenMobIdle) {
         this.mob = mob;
@@ -142,10 +142,6 @@ public class RockGolemMeleeAttackGoal extends Goal {
         }
     }
 
-    private double getFollowRange() {
-        return this.mob.getAttributeValue(EntityAttributes.GENERIC_FOLLOW_RANGE);
-    }
-
     protected void shootBone() {
         LivingEntity target = this.mob.getTarget();
         if (target != null) {
@@ -206,14 +202,6 @@ public class RockGolemMeleeAttackGoal extends Goal {
 
     protected boolean canAttack(LivingEntity target) {
         return this.isCooledDown() && this.mob.isInAttackRange(target) && this.mob.getVisibilityCache().canSee(target);
-    }
-
-    protected int getCooldown() {
-        return this.cooldown;
-    }
-
-    protected int getMaxCooldown() {
-        return this.getTickCount(20);
     }
 
 }

@@ -16,7 +16,7 @@ public class SmallRockProjectileEntity extends PersistentProjectileEntity {
 
     @Override
     protected ItemStack getDefaultItemStack() {
-        return new ItemStack(ModItems.ROCKITEM);
+        return new ItemStack(ModItems.ROCK_ITEM);
     }
 
     @Override
@@ -34,7 +34,7 @@ public class SmallRockProjectileEntity extends PersistentProjectileEntity {
 
     @Override
     protected ItemStack asItemStack() {
-        return new ItemStack(ModItems.ROCKITEM);
+        return new ItemStack(ModItems.ROCK_ITEM);
     }
 
 }

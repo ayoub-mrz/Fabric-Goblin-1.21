@@ -12,7 +12,6 @@ import software.bernie.geckolib.model.data.EntityModelData;
 
 public class GoblinModel<T extends GoblinEntity> extends GeoModel<GoblinEntity> {
 
-
     @Override
     public Identifier getModelResource(GoblinEntity goblinEntity) {
         return Identifier.of(GoblinMod.MOD_ID, "geo/goblin.geo.json");

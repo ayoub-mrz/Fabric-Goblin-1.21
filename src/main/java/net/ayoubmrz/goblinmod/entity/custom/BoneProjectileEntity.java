@@ -9,13 +9,8 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.text.Text;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.Direction;
@@ -34,10 +29,6 @@ public class BoneProjectileEntity extends PersistentProjectileEntity {
         super(entityType, world);
     }
 
-    public BoneProjectileEntity(World world, PlayerEntity player) {
-        super(ModEntities.ANCIENTBONE, player, world, new ItemStack(ModItems.ANCIENT_BONE), null);
-    }
-
     public BoneProjectileEntity(World world, GoblinEntity mob) {
         super(ModEntities.ANCIENTBONE, world);
     }
@@ -45,14 +36,6 @@ public class BoneProjectileEntity extends PersistentProjectileEntity {
     @Override
     protected ItemStack getDefaultItemStack() {
         return new ItemStack(ModItems.ANCIENT_BONE);
-    }
-
-    public float getRenderingRotation() {
-        rotation += 0.5f;
-        if(rotation >= 360) {
-            rotation = 0;
-        }
-        return rotation;
     }
 
     public boolean isGrounded() {
@@ -91,32 +74,50 @@ public class BoneProjectileEntity extends PersistentProjectileEntity {
 
     @Override
     protected ItemStack asItemStack() {
-        return new ItemStack(Items.BONE);
+        return new ItemStack(ModItems.ANCIENT_BONE);
     }
 
     @Override
     protected void onBlockHit(BlockHitResult result) {
         super.onBlockHit(result);
+        Direction side = result.getSide();
 
-        if(result.getSide() == Direction.SOUTH) {
+        if(side == Direction.SOUTH) {
             groundedOffset = new Vector2f(215f,180f);
         }
-        if(result.getSide() == Direction.NORTH) {
+        else if(side == Direction.NORTH) {
             groundedOffset = new Vector2f(215f, 0f);
         }
-        if(result.getSide() == Direction.EAST) {
+        else if(side == Direction.EAST) {
             groundedOffset = new Vector2f(215f,-90f);
         }
-        if(result.getSide() == Direction.WEST) {
+        else if(side == Direction.WEST) {
             groundedOffset = new Vector2f(215f,90f);
         }
-
-        if(result.getSide() == Direction.DOWN) {
+        else if(side == Direction.DOWN) {
             groundedOffset = new Vector2f(115f,180f);
         }
-        if(result.getSide() == Direction.UP) {
-            groundedOffset = new Vector2f(285f,180f);
+        else if(side == Direction.UP) {
+            if (groundedOffset == null) {
+                System.out.println(this.getFacing());
+                switch(this.getFacing()) {
+                    case NORTH:
+                        groundedOffset = new Vector2f(285f,0f);
+                        break;
+                    case SOUTH:
+                        groundedOffset = new Vector2f(285f,180f);
+                        break;
+                    case WEST:
+                        groundedOffset = new Vector2f(285f,-90f);
+                        break;
+                    case EAST:
+                        groundedOffset = new Vector2f(285f,90f);
+                        break;
+                    default:
+                        groundedOffset = new Vector2f(285f,180f);
+                        break;
+                }
+            }
         }
     }
-
 }

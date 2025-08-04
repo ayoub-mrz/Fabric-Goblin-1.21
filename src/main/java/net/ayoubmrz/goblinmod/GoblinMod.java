@@ -17,6 +17,9 @@ public class GoblinMod implements ModInitializer {
 	@Override
 	public void onInitialize() {
 
+		ModItems.registerModItems();
+		ModItemGroups.registerItemGroups();
+
 		ModEntities.registerModEntities();
 
 		FabricDefaultAttributeRegistry.register(ModEntities.GOBLIN, GoblinEntity.setAttributes());
@@ -34,9 +37,6 @@ public class GoblinMod implements ModInitializer {
 		FabricDefaultAttributeRegistry.register(ModEntities.ROCKGOLEM, RockGolemEntity.setAttributes());
 
 		FabricDefaultAttributeRegistry.register(ModEntities.WYVERN, WyvernEntity.setAttributes());
-
-		ModItems.registerModItems();
-		ModItemGroups.registerItemGroups();
 
 	}
 }

@@ -2,7 +2,6 @@ package net.ayoubmrz.goblinmod.entity.custom;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.entity.ai.pathing.Path;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.predicate.entity.EntityPredicates;
@@ -18,10 +17,6 @@ public class WyvernAttackGoal extends Goal {
     protected final HostileEntity mob;
     private final double speed;
     private final boolean pauseWhenMobIdle;
-    private Path path;
-    private double targetX;
-    private double targetY;
-    private double targetZ;
     private int updateCountdownTicks;
     private int cooldown;
     private long lastUpdateTime;
@@ -30,7 +25,6 @@ public class WyvernAttackGoal extends Goal {
     public boolean animationTriggered = false;
     private int startShooting = random.nextInt(7, 13); // sec
 
-    // Flying behavior variables
     private Vec3d flyingTargetPosition = Vec3d.ZERO;
     private static final double FLYING_HEIGHT = 10.0;
     private static final double CIRCLE_RADIUS = 10.0;
@@ -101,13 +95,13 @@ public class WyvernAttackGoal extends Goal {
 
         LivingEntity livingEntity = this.mob.getTarget();
         if (livingEntity != null) {
+
             // Update circle center based on target's current location
             updateCircleCenter(livingEntity);
 
             // Handle circular flying movement
             updateCircularFlyingMovement();
 
-            // Look at target
             this.mob.getLookControl().lookAt(livingEntity, 30.0F, 30.0F);
         }
 
@@ -163,7 +157,6 @@ public class WyvernAttackGoal extends Goal {
             this.mob.setYaw(yaw);
 
         } else {
-            // We're in range, start/continue circular movement
             // Calculate current angle based on position relative to center
             Vec3d relativePos = currentPos.subtract(circleCenter);
             double currentAngleFromPos = Math.atan2(relativePos.z, relativePos.x);
@@ -177,7 +170,7 @@ public class WyvernAttackGoal extends Goal {
             // Calculate target position on circle
             double targetX = circleCenter.x + Math.cos(circleAngle) * CIRCLE_RADIUS;
             double targetZ = circleCenter.z + Math.sin(circleAngle) * CIRCLE_RADIUS;
-            double targetY = circleCenter.y + Math.sin(this.mob.age * 0.1) * 0.5; // Gentle vertical bobbing
+            double targetY = circleCenter.y + Math.sin(this.mob.age * 0.1) * 0.5;
 
             Vec3d targetPosition = new Vec3d(targetX, targetY, targetZ);
 
@@ -191,14 +184,14 @@ public class WyvernAttackGoal extends Goal {
 
                 this.mob.setVelocity(
                         moveDirection.x * circleSpeed,
-                        moveDirection.y * circleSpeed * 0.5, // Gentler vertical movement
+                        moveDirection.y * circleSpeed * 0.5,
                         moveDirection.z * circleSpeed
                 );
             }
 
             // Calculate tangent direction for facing (perpendicular to radius)
             Vec3d radiusDirection = new Vec3d(Math.cos(circleAngle), 0, Math.sin(circleAngle));
-            Vec3d tangentDirection = new Vec3d(-radiusDirection.z, 0, radiusDirection.x); // 90° rotation
+            Vec3d tangentDirection = new Vec3d(-radiusDirection.z, 0, radiusDirection.x);
 
             // Set yaw to face the tangent direction (direction of circular movement)
             float targetYaw = (float) (Math.atan2(tangentDirection.z, tangentDirection.x) * 180.0 / Math.PI) - 90.0f;
@@ -212,7 +205,7 @@ public class WyvernAttackGoal extends Goal {
             while (yawDiff < -180) yawDiff += 360;
 
             // Apply gradual yaw change
-            float maxYawChange = 5.0f; // Maximum degrees per tick
+            float maxYawChange = 5.0f;
             if (Math.abs(yawDiff) > maxYawChange) {
                 yawDiff = Math.signum(yawDiff) * maxYawChange;
             }
@@ -245,7 +238,7 @@ public class WyvernAttackGoal extends Goal {
     }
 
     private void createAndLaunchProjectile(LivingEntity target) {
-        // Double-check target is still valid
+
         if (target == null || !target.isAlive() || this.mob.getTarget() != target) {
             return;
         }
@@ -282,17 +275,14 @@ public class WyvernAttackGoal extends Goal {
                     1.0f
             );
 
-            ball.setOnFireFor(100);
-
             if (!ball.hasNoGravity()) {
                 ball.setNoGravity(true);
             }
 
-            // Spawn the projectile entity
             this.mob.getWorld().spawnEntity(ball);
 
         } catch (Exception e) {
-            // Log error but don't crash the game
+            // Log error if spawning failed
             System.err.println("Error creating projectile: " + e.getMessage());
         }
     }

@@ -29,7 +29,6 @@ public class BoneProjectileRenderer extends EntityRenderer<BoneProjectileEntity>
         if(entity.groundedOffset != null) {
             if(!entity.isGrounded()) {
                 matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(MathHelper.lerp(tickDelta, entity.prevYaw, entity.getYaw())));
-                matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(entity.getRenderingRotation() * 5f));
                 matrices.translate(0, -1.0f, 0);
             } else {
                 matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(entity.groundedOffset.getY()));

@@ -6,7 +6,6 @@ import net.ayoubmrz.goblinmod.item.ModItems;
 import net.minecraft.data.client.*;
 import net.minecraft.util.Identifier;
 
-import javax.annotation.processing.Generated;
 import java.util.Optional;
 
 public class ModModelProvider extends FabricModelProvider {

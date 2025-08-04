@@ -23,8 +23,6 @@ public class WaterDaveEntity extends HostileEntity implements GeoEntity, IShoota
 
     private static final TrackedData<Boolean> IS_SHOOTING = DataTracker.registerData(WaterDaveEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 
-    private boolean isAttackWindingUp = false;
-    private int windupTicks = 0;
     private int shootingTicks = 0;
     private final String TEXTUREPATH = "textures/entity/blue_ball.png";
 
@@ -36,15 +34,6 @@ public class WaterDaveEntity extends HostileEntity implements GeoEntity, IShoota
     public void tick() {
         super.tick();
 
-        if (isAttackWindingUp) {
-            windupTicks--;
-
-            if (windupTicks <= 0) {
-                performAttack();
-                isAttackWindingUp = false;
-            }
-        }
-
         if (isShooting()) {
             shootingTicks++;
             if (shootingTicks > 5) {
@@ -52,27 +41,6 @@ public class WaterDaveEntity extends HostileEntity implements GeoEntity, IShoota
                 shootingTicks = 0;
             }
         }
-    }
-
-    public void startAttackWindup() {
-        this.isAttackWindingUp = true;
-        this.windupTicks = 10;
-    }
-
-    private void performAttack() {
-        LivingEntity target = this.getTarget();
-        if (this.isAlive() && target != null && this.canSee(target)) {
-            this.tryAttack(target);
-        }
-    }
-
-    @Override
-    public boolean tryAttack(Entity target) {
-        if (!isAttackWindingUp) {
-            startAttackWindup();
-            return false;
-        }
-        return super.tryAttack(target);
     }
 
     @Override
@@ -101,13 +69,9 @@ public class WaterDaveEntity extends HostileEntity implements GeoEntity, IShoota
     @Override
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
-
         this.goalSelector.add(1, new DaveMeleeAttackGoal(this, 0.4D, true));
-
         this.goalSelector.add(3, new WanderAroundFarGoal(this, 0.4f, 1));
-
         this.goalSelector.add(4, new LookAroundGoal(this));
-
         this.goalSelector.add(1, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
     }
 

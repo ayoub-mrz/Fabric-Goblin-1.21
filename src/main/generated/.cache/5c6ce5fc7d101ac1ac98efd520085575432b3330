@@ -1,9 +1,9 @@
-// 1.21	2025-08-03T13:22:28.9856295	Goblin Mod/minecraft:entity Loot Table
-ab92665574bf0e81f6c6af349625bd89a89350e9 data\goblinmod\loot_table\entities\lightning_dave.json
-14b8ea49b4df0bc9eb856a0a9be35f6f48e726bd data\goblinmod\loot_table\entities\rock_golem.json
-748fa8dcd1e1998301a55e6e34e308e68a25703e data\goblinmod\loot_table\entities\water_dave.json
-e78ec8193c42b95b801cace6b31c134ccf431d73 data\goblinmod\loot_table\entities\wyvern.json
-a6d18b0d28c4d85e1431f57b3c9c9a8a00c9c7dc data\goblinmod\loot_table\entities\lil_dave.json
-0682d2467b430f0f23467ede54aea67ca481cd55 data\goblinmod\loot_table\entities\goblin.json
-0007255282d7dabff13631e0ead657f7a057638d data\goblinmod\loot_table\entities\fire_dave.json
+// 1.21	2025-08-04T10:29:34.0575022	Goblin Mod/minecraft:entity Loot Table
+839ead81c206d6760b749fdf0b73ff7d73658b60 data\goblinmod\loot_table\entities\lightning_dave.json
+563891ca5a5e3d14dc6192c72c5d708ea67358fe data\goblinmod\loot_table\entities\rock_golem.json
+0d8d8896866e68da948186e3adf7ffba3a84cb0a data\goblinmod\loot_table\entities\water_dave.json
+54109f74945e4e05610c2fb1f37ac14eca0b392f data\goblinmod\loot_table\entities\wyvern.json
+98a8cefda314c8265bcc575346fb1f230faf87da data\goblinmod\loot_table\entities\lil_dave.json
+8a12fbccf4fc27e3a672b459ce03a4e0a00a74d2 data\goblinmod\loot_table\entities\goblin.json
+7ad725c778d05a90482db69ac1a761ae05c336ca data\goblinmod\loot_table\entities\fire_dave.json
 1a40c626a59f049cfd674c40fa0ae57de983eb89 data\goblinmod\loot_table\entities\big_wolf.json

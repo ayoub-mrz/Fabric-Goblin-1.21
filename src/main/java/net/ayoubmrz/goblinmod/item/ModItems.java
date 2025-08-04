@@ -12,7 +12,6 @@ public class ModItems {
 
     public static final Item GOBLIN_SPAWN_EGG = registerItem("goblin_spawn_egg",
             new SpawnEggItem(ModEntities.GOBLIN, 0x5a925f, 0x412f1f, new Item.Settings()));
-
     public static final Item LIL_DAVE_SPAWN_EGG = registerItem("lil_dave_spawn_egg",
             new SpawnEggItem(ModEntities.LILDAVE, 0x9dc783, 0xbfaf5f, new Item.Settings()));
     public static final Item FIRE_DAVE_SPAWN_EGG = registerItem("fire_dave_spawn_egg",
@@ -21,19 +20,16 @@ public class ModItems {
             new SpawnEggItem(ModEntities.WATERDAVE, 0x378ad1, 0x42c0bf, new Item.Settings()));
     public static final Item LIGHTNING_DAVE_SPAWN_EGG = registerItem("lightning_dave_spawn_egg",
             new SpawnEggItem(ModEntities.LIGHTNINGDAVE, 0xb0a14c, 0xd3bf55, new Item.Settings()));
-
     public static final Item BIG_WOLF_SPAWN_EGG = registerItem("big_wolf_spawn_egg",
             new SpawnEggItem(ModEntities.BIGWOLF, 0xf2f2f2, 0xc7c7c7, new Item.Settings()));
-
     public static final Item ROCK_GOLEM_SPAWN_EGG = registerItem("rock_golem_spawn_egg",
             new SpawnEggItem(ModEntities.ROCKGOLEM, 0x717577, 0x4b4f50, new Item.Settings()));
-
     public static final Item WYVERN_SPAWN_EGG = registerItem("wyvern_spawn_egg",
             new SpawnEggItem(ModEntities.WYVERN, 0x438672, 0xebe13e, new Item.Settings()));
 
     public static final Item ANCIENT_BONE = registerItem("ancient_bone", new Item( new Item.Settings()));
     public static final Item COIN = registerItem("coin", new Item( new Item.Settings()));
-    public static final Item ROCKITEM = registerItem("rock_item", new Item( new Item.Settings()));
+    public static final Item ROCK_ITEM = registerItem("rock_item", new Item( new Item.Settings()));
     public static final Item WYVERN_CLAWS = registerItem("wyvern_claws", new Item( new Item.Settings()));
 
     public static final Item RED_BALL = registerItem("red_ball", new Item( new Item.Settings()));

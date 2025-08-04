@@ -10,7 +10,6 @@ import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 public class BigWolfRenderer extends GeoEntityRenderer<BigWolfEntity> {
 
-
     public BigWolfRenderer(EntityRendererFactory.Context renderManager) {
         super(renderManager, new BigWolfModel<>());
     }

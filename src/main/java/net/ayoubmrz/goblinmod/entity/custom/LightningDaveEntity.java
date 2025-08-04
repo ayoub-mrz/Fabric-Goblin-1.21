@@ -23,8 +23,6 @@ public class LightningDaveEntity extends HostileEntity implements GeoEntity, ISh
 
     private static final TrackedData<Boolean> IS_SHOOTING = DataTracker.registerData(LightningDaveEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 
-    private boolean isAttackWindingUp = false;
-    private int windupTicks = 0;
     private int shootingTicks = 0;
     private final String TEXTUREPATH = "textures/entity/yellow_ball.png";
 
@@ -36,15 +34,6 @@ public class LightningDaveEntity extends HostileEntity implements GeoEntity, ISh
     public void tick() {
         super.tick();
 
-        if (isAttackWindingUp) {
-            windupTicks--;
-
-            if (windupTicks <= 0) {
-                performAttack();
-                isAttackWindingUp = false;
-            }
-        }
-
         if (isShooting()) {
             shootingTicks++;
             if (shootingTicks > 5) {
@@ -52,27 +41,6 @@ public class LightningDaveEntity extends HostileEntity implements GeoEntity, ISh
                 shootingTicks = 0;
             }
         }
-    }
-
-    public void startAttackWindup() {
-        this.isAttackWindingUp = true;
-        this.windupTicks = 10;
-    }
-
-    private void performAttack() {
-        LivingEntity target = this.getTarget();
-        if (this.isAlive() && target != null && this.canSee(target)) {
-            this.tryAttack(target);
-        }
-    }
-
-    @Override
-    public boolean tryAttack(Entity target) {
-        if (!isAttackWindingUp) {
-            startAttackWindup();
-            return false;
-        }
-        return super.tryAttack(target);
     }
 
     @Override

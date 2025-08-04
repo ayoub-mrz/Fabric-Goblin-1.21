@@ -60,7 +60,6 @@ public class LilDaveEntity extends HostileEntity implements GeoEntity {
         return super.tryAttack(target);
     }
 
-
     public static DefaultAttributeContainer.Builder setAttributes() {
         return HostileEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 20.0D)

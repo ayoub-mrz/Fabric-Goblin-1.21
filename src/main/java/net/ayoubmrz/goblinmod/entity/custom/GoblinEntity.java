@@ -27,6 +27,9 @@ public class GoblinEntity extends HostileEntity implements GeoEntity {
     private int windupTicks = 0;
     private int shootingTicks = 0;
 
+    public GoblinEntity(EntityType<? extends HostileEntity> entityType, World world) {
+        super(entityType, world);
+    }
 
     @Override
     public void tick() {
@@ -69,10 +72,6 @@ public class GoblinEntity extends HostileEntity implements GeoEntity {
             return false;
         }
         return super.tryAttack(target);
-    }
-
-    public GoblinEntity(EntityType<? extends HostileEntity> entityType, World world) {
-        super(entityType, world);
     }
 
     @Override

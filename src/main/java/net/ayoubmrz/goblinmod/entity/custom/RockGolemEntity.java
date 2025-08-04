@@ -28,6 +28,9 @@ public class RockGolemEntity extends HostileEntity implements GeoEntity {
     private int windupTicks = 0;
     private int shootingTicks = 0;
 
+    public RockGolemEntity(EntityType<? extends HostileEntity> entityType, World world) {
+        super(entityType, world);
+    }
 
     @Override
     public void tick() {
@@ -70,10 +73,6 @@ public class RockGolemEntity extends HostileEntity implements GeoEntity {
             return false;
         }
         return super.tryAttack(target);
-    }
-
-    public RockGolemEntity(EntityType<? extends HostileEntity> entityType, World world) {
-        super(entityType, world);
     }
 
     @Override
@@ -147,7 +146,7 @@ public class RockGolemEntity extends HostileEntity implements GeoEntity {
     private PlayState predicate(AnimationState<RockGolemEntity> animationState) {
         var controller = animationState.getController();
 
-        if (animationState.isMoving() && !this.isShooting() && !this.handSwinging) {
+        if (animationState.isMoving() && !this.isShooting()) {
             controller.setAnimation(RawAnimation.begin().then("animation.rock_golem.walk", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }

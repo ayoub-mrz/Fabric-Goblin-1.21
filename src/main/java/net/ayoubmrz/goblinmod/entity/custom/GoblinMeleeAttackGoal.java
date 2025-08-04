@@ -26,7 +26,8 @@ public class GoblinMeleeAttackGoal extends Goal {
     private int waitForAnimation = 0;
     public boolean animationTriggered = false;
     Random random = new Random();
-    private int startShooting = random.nextInt(10, 21); // 10 - 20 sec
+//    private int startShooting = random.nextInt(10, 21);
+    private int startShooting = 2;
 
     public GoblinMeleeAttackGoal(GoblinEntity mob, double speed, boolean pauseWhenMobIdle) {
         this.mob = mob;
@@ -142,10 +143,6 @@ public class GoblinMeleeAttackGoal extends Goal {
         }
     }
 
-    private double getFollowRange() {
-        return this.mob.getAttributeValue(EntityAttributes.GENERIC_FOLLOW_RANGE);
-    }
-
     protected void shootBone() {
         LivingEntity target = this.mob.getTarget();
         if (target != null) {
@@ -183,6 +180,10 @@ public class GoblinMeleeAttackGoal extends Goal {
                     1.0f
             );
 
+            // Making bone face the same face as the Goblin
+            bone.setYaw(this.mob.getYaw());
+            bone.setPitch(this.mob.getPitch());
+
             this.mob.getWorld().spawnEntity(bone);
         }
     }
@@ -206,14 +207,6 @@ public class GoblinMeleeAttackGoal extends Goal {
 
     protected boolean canAttack(LivingEntity target) {
         return this.isCooledDown() && this.mob.isInAttackRange(target) && this.mob.getVisibilityCache().canSee(target);
-    }
-
-    protected int getCooldown() {
-        return this.cooldown;
-    }
-
-    protected int getMaxCooldown() {
-        return this.getTickCount(20);
     }
 
 }

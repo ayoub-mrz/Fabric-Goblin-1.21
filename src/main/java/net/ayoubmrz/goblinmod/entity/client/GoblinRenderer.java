@@ -8,7 +8,6 @@ import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 public class GoblinRenderer extends GeoEntityRenderer<GoblinEntity> {
 
-
     public GoblinRenderer(EntityRendererFactory.Context renderManager) {
         super(renderManager, new GoblinModel<>());
     }

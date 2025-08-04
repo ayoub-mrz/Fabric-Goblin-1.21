@@ -17,7 +17,6 @@ import software.bernie.geckolib.animatable.instance.SingletonAnimatableInstanceC
 import software.bernie.geckolib.animation.*;
 import software.bernie.geckolib.animation.AnimationState;
 
-
 public class WyvernEntity extends HostileEntity implements GeoEntity, IShootable {
 
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);

@@ -2,13 +2,13 @@
 	"schemaVersion": 1,
 	"id": "goblinmod",
 	"version": "${version}",
-	"name": "Goblin Mod",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"name": "Muck Mobs Mod",
+	"description": "Mod that add Muck Mobs!",
 	"authors": [
-		"Me!"
+		"ayoubMrz!"
 	],
 	"contact": {
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"sources": "https://github.com/ayoub-mrz/Fabric-Goblin-1.21"
 	},
 	"license": "CC0-1.0",
 	"icon": "assets/goblinmod/icon.png",
@@ -35,6 +35,6 @@
 		"fabric-api": "*"
 	},
 	"suggests": {
-		"another-mod": "*"
+		"Muck Equipment": "https://modrinth.com/mod/muck-equipment"
 	}
 }
